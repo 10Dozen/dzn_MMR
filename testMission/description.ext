@@ -1,0 +1,8 @@
+
+#include "MMR\ui\baseDialogClasses.hpp"
+#include "MMR\ui\dzn_MMR_Dialog.hpp"
+
+enableDebugConsole = 1;
+disabledAI = 1;
+respawn = 3;
+respawnDelay = 9999999; 
