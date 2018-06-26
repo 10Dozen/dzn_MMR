@@ -33,21 +33,27 @@ call compile preprocessFileLineNumbers "MMR\UI Functions.sqf";
 	while {true} do {
 		waituntil {!(isnull (finddisplay 602))}; //waituntil inventory UI is opened
 
-		AC = allControls (findDisplay 602);
-		ACstr = str ( allControls (findDisplay 602) );
-
 		((findDisplay 602) displayCtrl 633) ctrlSetEventHandler ["LBDblClick", "[_this, 'Uniform'] call dzn_MMR_fnc_handleInvDoubleClick"];
 		((findDisplay 602) displayCtrl 638) ctrlSetEventHandler ["LBDblClick", "[_this, 'Vest'] call dzn_MMR_fnc_handleInvDoubleClick"];  
 		((findDisplay 602) displayCtrl 619) ctrlSetEventHandler ["LBDblClick", "[_this, 'Backpack'] call dzn_MMR_fnc_handleInvDoubleClick"];
 		
 		{
-			_x ctrlSetEventHandler ["MouseButtonClick", "_this call dzn_MMR_fnc_handleInvSingleClick"];
+			_x ctrlSetEventHandler ["MouseButtonClick", "call dzn_MMR_fnc_uiHideDropdown"];
 		} forEach allControls (findDisplay 602);
 		
 		waituntil {isnull (finddisplay 602)};
 	};
 };
 
+
+
+
+
+
+
+
+
+/*
 
 
 dzn_MMR_ConvertToListItems = [
@@ -81,8 +87,8 @@ dzn_MMR_fnc_List_SelectItem = {
 	
 };
 
-/*
+
 	_ctrlPic ctrlSetText (getText (configFile >> "CfgMagazines" >> _list select 0 >> "picture"));
-	*/
 
 
+*/
