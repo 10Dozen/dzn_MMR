@@ -13,7 +13,9 @@
 */
 params ["_action","_class","_itemIndex","_inventorySection","_actionData"];
 
-private _selectedMag = ([_inventorySection, _itemIndex] call dzn_MMR_fnc_getMagazineByIndex) params ["_magClass", "_magAmmo"];
+([_inventorySection, _itemIndex] call dzn_MMR_fnc_getMagazineByIndex) params ["_magClass", "_magAmmo"];
+
+dzn_dropdown_log = [_this, _magClass,_magAmmo];
 
 switch (toUpper(_action)) do {
 	case "PACK_BULK": {
@@ -22,7 +24,7 @@ switch (toUpper(_action)) do {
 	};
 	case "PACK_TO_BULK": {
 		// _actionData = @_mappedList
-		[_magClass, _magAmmo, _inventorySection, _actionData] call dzn_MMR_fnc_showPackToMenu;
+		[_magClass, _magAmmo, _inventorySection, _actionData] call dzn_MMR_fnc_uiShowPackToMenu;
 	};
 	case "UNPACK_MAG": {
 		// _actionData = @BulkAmmoClass
@@ -38,4 +40,8 @@ switch (toUpper(_action)) do {
 	};
 };
 
+call dzn_MMR_fnc_uiHideDropdown;
+
 (true)
+
+// [["Unpack_Mag","30Rnd_556x45_Stanag",4,"Uniform","dzn_10rnd_556x45_bulk"],true,"30Rnd_556x45_Stanag",20]

@@ -17,16 +17,31 @@ player addMagazine [_class, _ammo];
 
 // Check is magazine list changed - if not - drop mag to ground
 if ((magazinesAmmo player) isEqualTo _currentMags) exitWith {
-	
-	private _holder = if (
-		!isNull (player getVariable ["dzn_MMR_LastWeaponHolder", objNull])
-		&& { player distance (player getVariable "dzn_MMR_LastWeaponHolder") < 0.75 }	
-	) then {
-		createVehicle ["WeaponHolderSimulated", player modelToWorld [0,0.5,0], [],0,"CAN_COLLIDE"]
+	private _holder = objNull;
+	private _hintText = "";
+
+	if (vehicle player == player) then {
+		// Drop to ground
+		_holder = if (
+			!isNull (player getVariable ["dzn_MMR_LastWeaponHolder", objNull])
+			&& { player distance (player getVariable "dzn_MMR_LastWeaponHolder") < 1.25 }	
+		) then {
+			player getVariable "dzn_MMR_LastWeaponHolder"
+		} else {
+			createVehicle ["WeaponHolderSimulated", player modelToWorld [0,0.5,0], [],0,"CAN_COLLIDE"]
+		};
+		
+		player setVariable ["dzn_MMR_LastWeaponHolder", _holder];
+
+		_hintText = format ["%1 dropped", getText (configFile >> "CfgMagazines" >> _class >> "displayName")];
+	} else {
+		// In vehicle - drop to vehicle cargo
+		_holder = vehicle player;
+		_hintText = format ["%1 is placed to vehicle", getText (configFile >> "CfgMagazines" >> _class >> "displayName")];
 	};
 
 	_holder addMagazineAmmoCargo [_class, 1, _ammo];
-	player setVariable ["dzn_MMR_LastWeaponHolder", _holder];
 
-	hint format ["%1 dropped", getText (configFile >> "CfgMagazines" >> _class >> "displayName")];
+
+	hint _hintText;
 };

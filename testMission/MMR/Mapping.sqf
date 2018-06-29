@@ -33,7 +33,7 @@ dzn_MMR_Map = [
 	All listed magazines (e.g. RPG7_F) may be exchanged to any listed magazine (e.g. rhs_rpg7_PG7VL_mag)
 
 */
-[
+,[
 	"RPG7_F"
 	, "rhs_rpg7_PG7VL_mag"
 ]

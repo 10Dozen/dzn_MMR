@@ -12,12 +12,11 @@
 		[_item, _class, _itemIndex, _inventorySection, _mappedList] call dzn_MMR_fnc_uiShowInvDropdown;
 */
 
-params ["_item", "_class", "_itemIndex", "_inventorySection", " _mappedList"];
+params ["_item", "_class", "_itemIndex", "_inventorySection", "_mappedList"];
 
 private _xPos = (ctrlPosition _item select 0) + (ctrlPosition _item select 2);
 private _yPos = getMousePosition select 1;
 private _dropdownItems = [];
-
 
 // BULK AMMO
 // 		PACK -> Check that bulk ammo can be exchanged to player's weapon 
@@ -77,13 +76,17 @@ if (_bulkAmmo != "") exitWith {
 	];
 
 	// PACK -> check is there are BulkAmmo in players inventory to pack magazine
-	private _hasBulkAmmoAvailable = (_bulkAmmo in (magazines player));
+	private _hasBulkAmmoAvailable = (_bulkAmmo in ((magazines player) apply { toLower _x }));
+	// Check selected magazine is not full
+	private _magAmmo = ([_inventorySection, _itemIndex] call dzn_MMR_fnc_getMagazineByIndex) select 1;
+	private _magAmmoFull = getNumber (configFile >> "CfgMagazines" >> _class >> "count");
+
 	_dropdownItems pushBack [
 		"Pack"
 		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
 		, ["Pack_Mag", _class, _itemIndex, _inventorySection, _bulkAmmo]
-		, _hasBulkAmmoAvailable
-		, _xPos, _yPos
+		, _hasBulkAmmoAvailable && (_magAmmo != _magAmmoFull)
+		, _xPos, _yPos + 0.05
 	];
 
 	// Add dropdown items

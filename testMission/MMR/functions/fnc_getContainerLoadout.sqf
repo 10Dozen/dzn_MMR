@@ -18,9 +18,16 @@ private _container = toLower _this;
 
 private _result = [];
 private _allMags = magazinesAmmoFull player;
-private _itemsInContainer = (vestItems player) call BIS_fnc_consolidateArray;
-private _magsInContainer = (((magazinesAmmoFull player) select { toLower(_x select 4) == _container }) call BIS_fnc_consolidateArray) apply {
+
+private _itemsInContainer = switch toUpper(_container) do {
+	case "UNIFORM": 	{ uniformItems player };
+	case "VEST":		{ vestItems player };
+	case "BACKPACK":	{ backpackItems player };	
+} call BIS_fnc_consolidateArray;
+
+private _magsInContainer = ((_allMags select { toLower(_x select 4) == _container }) call BIS_fnc_consolidateArray) apply {
 	_x params ["_item","_count"];
+
 	[ _item select 0, _item select 1, _count ]
 };
 

@@ -1,6 +1,6 @@
 /*
 	author: 10Dozen
-	description: Repack selected magazine with available bulk ammo
+	description: Repack selected magazine with 1 bulk ammo magazine (total ammo)
 	input: ARRAY - 
 		0: STRING - source magazine classname
 		1: SCALAR - source magazine current ammo
@@ -14,6 +14,7 @@
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_bulkClass"];
 
 // Calculate total bulk ammo rounds
+private _bulkMagAmmo = getNumber (configFile >> "CfgMagazines" >> _bulkClass >> "count");
 private _bulkAmmoTotal = 0;
 private _bulkMagazines = [_bulkClass] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
 { 
@@ -27,37 +28,36 @@ player removeMagazines _bulkClass;
 // Get source magazines
 private _magazines = [_sourceMagClass, _container] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
 
-// Remove all magazines of repacking class
-for "_i" from 1 to (count _magazines) do {
-	player removeItemFromVest _sourceMagClass;
-};
+// Remove all magazines of repacking class (source)
+[_sourceMagClass, count _magazines, _container] call dzn_MMR_fnc_removeMagazinesFromContainer;
 
 // Add placeholders to add magazines to given container via addMagazine
 _container call dzn_MMR_fnc_fillWithPlaceholders;
 
+// Adding magazines back, source mag loaded with additional up to 10 ammo
 private _modified = false;
 private _sourceMagAmmoFull = getNumber (configFile >> "CfgMagazines" >> _sourceMagClass >> "count");
 private _ammoNeeded = _sourceMagAmmoFull - _sourceMagAmmo;
+private _ammoToLoad = _ammoNeeded min (_bulkMagAmmo min _bulkAmmoTotal);
 
-// Go through all magazines of source class that player has and update source magazine (one that has exact same ammo as given):
-//	- if target magazine contains ammo > selected bulk ammo mag -> remove bulk ammo mag
-//	- if ammo < selected bulk ammo mag -> add bulk ammo mag with (current bulk ammo - magazine ammo)
+/*
+Examples:
+["Input > Magazine 22/30, Ammo 100","Need to load: 8","Ammo used to load: 8","Magazine final: 30/30","Ammo left: 92"]
+["Input > Magazine 22/30, Ammo 2","Need to load: 8","Ammo used to load: 2","Magazine final: 24/30","Ammo left: 0"]
+["Input > Magazine 22/30, Ammo 21","Need to load: 8","Ammo used to load: 8","Magazine final: 30/30","Ammo left: 13"]
+["Input > Magazine 2/30, Ammo 11","Need to load: 28","Ammo used to load: 10","Magazine final: 12/30","Ammo left: 1"]
+["Input > Magazine 2/30, Ammo 15","Need to load: 28","Ammo used to load: 10","Magazine final: 12/30","Ammo left: 5"]
+["Input > Magazine 2/30, Ammo 115","Need to load: 28","Ammo used to load: 10","Magazine final: 12/30","Ammo left: 105"]
+*/
+
 {
 	_x params ["_magClass", "_magAmmo"];
 
 	if (_magAmmo == _sourceMagAmmo && !_modified) then {
 		// Modify source magazine
+		player addMagazine [_sourceMagClass, _sourceMagAmmo + _ammoToLoad]; 
 
-		if ( _ammoNeeded <= _bulkAmmoTotal ) then {
-			// There are enough bulk ammo to fully repack magazine -> add fully loaded magazine
-			player addMagazine [_sourceMagClass, _sourceMagAmmoFull];
-			_bulkAmmoTotal = _bulkAmmoTotal - _ammoNeeded;		
-		} else {
-			// There are NOT enough bulk ammo to fully repack magazine -> add all available bulk ammo to magazine
-			player addMagazine [_sourceMagClass, _sourceMagAmmo + _bulkAmmoTotal];
-			_bulkAmmoTotal = 0;
-		};
-
+		_bulkAmmoTotal = _bulkAmmoTotal - _ammoToLoad;
 		_modified = true;
 	} else {
 		// Add other magazines
@@ -68,16 +68,13 @@ private _ammoNeeded = _sourceMagAmmoFull - _sourceMagAmmo;
 // Clear placeholders
 call dzn_MMR_fnc_removePlaceholders;
 
-// Re-add not consumed bulk ammo
-if (_bulkAmmoTotal > 0) then {
-	private _bulkMagSize = getNumber (configFile >> "CfgMagazines" >> _bulkClass >> "count");
-	private _ammoToAdd = 0;
+// Re-add not consumed bulk ammo + repack bulk ammo mags
+while { _bulkAmmoTotal > 0 } do {
+	private _ammo = _bulkAmmoTotal min _bulkMagAmmo;
 
-	while { _bulkAmmoTotal > 0 } do {
-		_ammoToAdd = if (_bulkAmmoTotal > _bulkMagSize) then { _bulkMagSize	} else { (_bulkMagSize - _bulkAmmoTotal) };
-		_bulkAmmoTotal = _bulkAmmoTotal - _ammoToAdd;
-
-		[_bulkClass, _ammoToAdd] call dzn_MMR_fnc_addMagazineSafe;
+	if (_ammo > 0) then {
+		[_bulkClass, _ammo] call dzn_MMR_fnc_addMagazineSafe;
+		_bulkAmmoTotal = _bulkAmmoTotal - _ammo;
 	};
 };
 
