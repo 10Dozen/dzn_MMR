@@ -36,16 +36,25 @@ class CfgWeapons
 	{
 		author = "10Dozen";
 		displayName = "";
-		mass = 1;
-		scope = 0;
+		scope = 1;
+		class ItemInfo
+		{
+			mass = 2;
+		}
 	};
 	class dzn_Placeholder_Medium: dzn_Placeholder_Small
 	{
-		mass = 6;
+		class ItemInfo
+		{
+			mass = 10;
+		}
 	};
 	class dzn_Placeholder_Big: dzn_Placeholder_Small
 	{
-		mass = 15;
+		class ItemInfo
+		{
+			mass = 25;
+		}
 	};
 };
  
