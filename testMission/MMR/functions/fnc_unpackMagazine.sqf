@@ -59,4 +59,6 @@ call dzn_MMR_fnc_removePlaceholders;
 // Safe add bulk ammo
 [_bulkClass, _bulkAmmoFinal] call dzn_MMR_fnc_addMagazineSafe;
 
+[_bulkClass] call dzn_MMR_fnc_resortBulkMagazines;
+
 (true)

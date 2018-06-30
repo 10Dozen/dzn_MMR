@@ -69,6 +69,9 @@ Examples:
 call dzn_MMR_fnc_removePlaceholders;
 
 // Re-add not consumed bulk ammo + repack bulk ammo mags
+[_bulkClass, _bulkAmmoTotal, false] call dzn_MMR_fnc_resortBulkMagazines;
+
+/*
 while { _bulkAmmoTotal > 0 } do {
 	private _ammo = _bulkAmmoTotal min _bulkMagAmmo;
 
@@ -77,5 +80,6 @@ while { _bulkAmmoTotal > 0 } do {
 		_bulkAmmoTotal = _bulkAmmoTotal - _ammo;
 	};
 };
+*/
 
 (true)

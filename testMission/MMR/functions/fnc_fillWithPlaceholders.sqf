@@ -25,9 +25,11 @@ if (_containers isEqualTo []) exitWith { (false) };
 player setVariable ["dzn_MMR_PlaceholderCount", 0];
 {
 	call compile format ["
-		private _items = 0;
-		while { (load%1 player < 0.99) || _items < 300 } do {
-			_items = _items + 1;
+		private _attempts = 0;
+		while { 
+			_attempts = _attempts + 1;
+			(load%1 player < 0.99) && _attempts < 150 
+		} do {			
 			player setVariable [
 				'dzn_MMR_PlaceholderCount'
 				, (player getVariable 'dzn_MMR_PlaceholderCount') + 1

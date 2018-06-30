@@ -20,6 +20,11 @@ Pack to - открывает диалог где можно заряжать в�
 - На словах выглядит заморочено, нельзя пресс Х ту репак, нужно все руками
 - Все эти трассеры ебаные будут теряться в конверсиях или наоборот - из рассыпухи обычных патронов можно собирать магазины с трассерами другого цвета
 
+ToDo:
+	[x]		ExchangeTo action for Primary, GLs and launchers
+	[ok]	Add BulkAmmo repack on UNPACK action
+	-	Add Tracer bulk ammo type
+	-	add additional placeholders classed (small and big mass) + rewrite fillWithPlaceholder function to make it faster + replace calls with spawns 
 */
 
 

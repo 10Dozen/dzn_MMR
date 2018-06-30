@@ -1,44 +1,50 @@
 /*
 	author: 10Dozen
-	description: Compose and draw UI menu for Pack To... magazine class selection
+	description: Compose and draw UI menu for Exchange To... magazine class selection
 	input: ARRAY - 
-		0: STRING - source magazine classname (bulk ammo)
+		0: STRING - source magazine classname (magazine without bulk ammo options)
 		1: SCALAR - source magazine current ammo
 		2: STRING - inventroy section type (Uniform/Vest/Backpack)
 		3: ARRAY - list of compatible mags
 	returns: nothing
 	example:
 		[
-			"dzn_10Rnd_556x45_Bulk"
-			, 10
-			, "Vest"
-			, [
-				"dzn_10Rnd_556x45_Bulk"
-				,"rhs_mag_30Rnd_556x45_M855_Stanag"
-				,"hlc_30rnd_556x45_b_HK33"
-				,"CUP_30Rnd_556x45_G36"
-			]
-		] call dzn_MMR_fnc_uiShowPackToMenu;
+			"RPG7_F"
+			, 1
+			, "Backpack"
+			, ["RPG7_F", "rhs_rpg7_PG7VL_mag"]
+		] call dzn_MMR_fnc_uiShowExchangeToMenu;
 */
 
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_mappedList"];
 
-// Prepare menu: labels, pictures and dropdown options
 private _getConfigText = {
 	params ["_class", "_par"];
 	( getText (configFile >> "CfgMagazines" >> _class >> _par) ) 
 };
 
+// Prepare menu: labels, pictures and dropdown options
+private _sourceMagClass = toLower _sourceMagClass;
 private _sourceMagDisplayName = [[_sourceMagClass, "displayName"] call _getConfigText, "SPLIT_LINES"] call dzn_MMR_fnc_formatStrings;;
 private _sourceMagPic = [_sourceMagClass, "picture"] call _getConfigText;
 
 // 		Getting sorted Pack to options
 private _sortedList = [];
 
-// 		Sorting -> Compatible mags -> [@Class, @Name, @Author, @Picture, @IsCompatible]
-private _compatibleMagazines = (getArray (configFile >> "CfgWeapons" >> primaryWeapon player >> "magazines")) apply { toLower _x };
+// 		Compatible items
+private _UGLmuzzle = (getArray(configFile >> "cfgWeapons" >> primaryWeapon player >> "muzzles")) - ["this","SAFE"];
+private _compatibleMagazines = [];
 {
-	if (_x in _mappedList) then {
+	_compatibleMagazines append ((getArray (configFile >> "CfgWeapons" >> _x >> "magazines")) apply { toLower _x });
+} forEach [
+	primaryWeapon player
+	, if (_UGLmuzzle isEqualTo []) then { "" } else { _UGLmuzzle select 0 }
+	, secondaryWeapon player
+	, handgunWeapon player
+];
+
+{
+	if (_x in _mappedList && _x != _sourceMagClass) then {
 		_sortedList pushBack [
 			_x
 			, [_x, "displayName"] call _getConfigText
@@ -51,8 +57,11 @@ private _compatibleMagazines = (getArray (configFile >> "CfgWeapons" >> primaryW
 	};
 } forEach _compatibleMagazines;
 
+// 		Remove source magazine from mapped list
+private _list = _mappedList - [_sourceMagClass];
+
 // 		Sorting -> Grouping by DLC/author -> [ @Author, @DisplayName, @Classname ]
-private _list = _mappedList apply {	[ [_x, "author"] call _getConfigText, [_x, "displayName"] call _getConfigText, _x ] };
+_list = _list apply { [ [_x, "author"] call _getConfigText, [_x, "displayName"] call _getConfigText, _x ] };
 
 _list sort true;
 
@@ -62,7 +71,7 @@ _list sort true;
 	_x params ["_author", "_displayName", "_classname"];
 
 	// Do not add items without display name (means, that mod is not launched now)
-	if (_displayName != "" && !(_classname in dzn_MMR_Bulk)) then {		
+	if (_displayName != "") then {		
 		_sortedList pushBack [
 			_classname
 			, _displayName
@@ -80,12 +89,13 @@ createDialog "dzn_MMR_Group";
 private _display = (findDisplay 192005);
 
 // 		Static contend
-(_display displayCtrl 5101) ctrlSetStructuredText parseText format ["<t font='PuristaMedium'>%1</t>", "Pack To..."];
+(_display displayCtrl 5101) ctrlSetStructuredText parseText format ["<t font='PuristaMedium'>%1</t>", "Exchange To..."];
 (_display displayCtrl 5106) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", _sourceMagDisplayName];
 (_display displayCtrl 5105) ctrlSetText _sourceMagPic;
-(_display displayCtrl 5110) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", "Pack to"];
+(_display displayCtrl 5110) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", "Exchange to"];
 
-// 		Dropdown
+//		Dropdown
+
 private _dropdown = (_display displayCtrl 5109);
 {
 	_x params ["_itemClass","_itemDisplayName","_itemAuthor","_itemPic", "_isCompatible"];
@@ -110,15 +120,16 @@ _dropdown lbSetCurSel 0;
 (_display displayCtrl 5103) ctrlSetText "CANCEL";
 (_display displayCtrl 5103) ctrlSetEventHandler ["ButtonClick", "closeDialog 2"];
 
-(_display displayCtrl 5104) ctrlSetText "PACK TO";
+(_display displayCtrl 5104) ctrlSetText "EXCHANGE TO";
 (_display displayCtrl 5104) ctrlSetEventHandler [
 	"ButtonClick"
 	, format ["
 		private _targetClass = ((findDisplay 192005) displayCtrl 5109) lbData (lbCurSel ((findDisplay 192005) displayCtrl 5109));
 
-		DZN_PACKTO = [""%1"", %2, ""%3"", _targetClass];
+		DZN_EXCHGTO = [""%1"", %2, ""%3"", _targetClass];
 
-		[""%1"", %2, ""%3"", _targetClass] call dzn_MMR_fnc_packNewMagazine;
+		[""%1"", %2, ""%3"", _targetClass] spawn dzn_MMR_fnc_packNewMagazine;
+
 		closeDialog 2;"
 		, _sourceMagClass
 		, _sourceMagAmmo

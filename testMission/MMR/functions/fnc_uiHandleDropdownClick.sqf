@@ -36,12 +36,10 @@ switch (toUpper(_action)) do {
 	};
 	case "EXCHANGE_TO": {
 		// _actionData = @MappedList
-		// [_magClass, _magAmmo, _inventorySection, _actionData] call dzn_MMR_fnc_showExchangeToMenu;
+		[_magClass, _magAmmo, _inventorySection, _actionData] call dzn_MMR_fnc_uiShowExchangeToMenu;
 	};
 };
 
 call dzn_MMR_fnc_uiHideDropdown;
 
 (true)
-
-// [["Unpack_Mag","30Rnd_556x45_Stanag",4,"Uniform","dzn_10rnd_556x45_bulk"],true,"30Rnd_556x45_Stanag",20]

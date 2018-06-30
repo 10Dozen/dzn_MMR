@@ -35,7 +35,7 @@ dzn_MMR_Map = [
 */
 ,[
 	"RPG7_F"
-	, "rhs_rpg7_PG7VL_mag"
+	, "rhs_rpg7_PG7V_mag"
 ]
 
 

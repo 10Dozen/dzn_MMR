@@ -104,13 +104,16 @@ if (_bulkAmmo != "") exitWith {
 
 // SPECIAL MAGAZINE like 40mm grenade, HEAT RPG, etc. (not a bulk ammo AND not mapped to any bulk ammo, but has exchange options)
 // 		EXCHANGE TO -> Check magazine exchange options exists
-[
+uiNamespace setVariable [
+	"dzn_MMR_Inventory_DropdownItem0"
+	, [
 		"Exchange to"
 		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
 		, ["Exchange_to", _class, _itemIndex, _inventorySection, _mappedList]
 		, true
 		, _xPos, _yPos
-] call dzn_MMR_fnc_uiAddDropdownItem;
+	] call dzn_MMR_fnc_uiAddDropdownItem
+];
 uiNamespace setVariable ["dzn_MMR_Inventory_DropdownItemsCount", 1];
 
 (true)

@@ -12,11 +12,10 @@
 */
 
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_targetMagClass"];
-dzn_packnew = [_this];
 
 private _magazines = [_sourceMagClass, _container] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
 
-// Remove all magazines of unpacking class
+// Remove all magazines of unpacking/exchanging class
 [_sourceMagClass, count _magazines, _container] call dzn_MMR_fnc_removeMagazinesFromContainer;
 
 // Add placeholders to add magazines to given container via addMagazine
