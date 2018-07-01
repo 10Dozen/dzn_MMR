@@ -23,8 +23,10 @@ Pack to - открывает диалог где можно заряжать в�
 ToDo:
 	[x]		ExchangeTo action for Primary, GLs and launchers
 	[ok]	Add BulkAmmo repack on UNPACK action
-	-	Add Tracer bulk ammo type
-	-	add additional placeholders classed (small and big mass) + rewrite fillWithPlaceholder function to make it faster + replace calls with spawns 
+	[ok]	Add Tracer bulk ammo type
+	[ok]	add additional placeholders classed (small and big mass) + rewrite fillWithPlaceholder function to make it faster + replace calls with spawns 
+	[ok]	Check unpack ammo saved 
+	[]		Add Pack for handgun compatible mags ammo exchange ?
 */
 
 

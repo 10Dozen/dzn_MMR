@@ -7,10 +7,21 @@
 		call dzn_MMR_fnc_removePlaceholders;
 */
 
-for "_i" from 0 to (player getVariable ["dzn_MMR_PlaceholderCount",100]) do { 
-	player removeItem "ItemWatch";
-};
+private _count = (player getVariable ["dzn_MMR_PlaceholderCount",100]) + 6;
 
-player setVariable ["dzn_MMR_PlaceholderCount", 0];
+player removeItem "dzn_Placeholder_Big";
+player removeItem "dzn_Placeholder_Big";
+player removeItem "dzn_Placeholder_Big";
+player removeItem "dzn_Placeholder_Big";
+
+player removeItem "dzn_Placeholder_Medium";
+player removeItem "dzn_Placeholder_Medium";
+player removeItem "dzn_Placeholder_Medium";
+player removeItem "dzn_Placeholder_Medium";
+
+for "_i" from 0 to (_count) do { 
+	player removeItem "dzn_Placeholder_Small";
+	player removeItem "dzn_Placeholder_Small";
+};
 
 (true)

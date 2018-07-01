@@ -128,7 +128,7 @@ _dropdown lbSetCurSel 0;
 
 		DZN_EXCHGTO = [""%1"", %2, ""%3"", _targetClass];
 
-		[""%1"", %2, ""%3"", _targetClass] spawn dzn_MMR_fnc_packNewMagazine;
+		[""%1"", %2, ""%3"", _targetClass] call dzn_MMR_fnc_packNewMagazine;
 
 		closeDialog 2;"
 		, _sourceMagClass

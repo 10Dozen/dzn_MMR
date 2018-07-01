@@ -17,12 +17,11 @@ private _bulkMagazines = [_bulkClass] call dzn_MMR_fnc_getMagazinesAmmoFromConta
 
 // Calculate total ammo if not passed
 if (_totalBulkAmmo < 0) then {
+	_totalBulkAmmo = 0;
 	{ 
 		_x params ["", "_ammo"];
 		_totalBulkAmmo = _totalBulkAmmo + _ammo;
 	} forEach _bulkMagazines;
-
-
 };
 
 // Remove all bulk magazines if necessary (remove by default)

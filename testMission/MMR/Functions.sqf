@@ -30,15 +30,13 @@ COMPILE_FUNCTION(fnc_uiAddDropdownItem);
 COMPILE_FUNCTION(fnc_uiHandleDropdownClick);
 COMPILE_FUNCTION(fnc_uiOnLBSelChanged);
 
+COMPILE_FUNCTION(fnc_getFilteredMagazines);
+
+
 
 /*
 
-dzn_MMR_fnc_uiOnLBSelChanged = compile preprocessFileLineNumbers "MMR\functions\fnc_uiOnLBSelChanged.sqf";
-
-
-dzn_MMR_fnc_uiShowExchangeToMenu = compile preprocessFileLineNumbers "MMR\functions\fnc_uiShowExchangeToMenu.sqf";
-
-
-
+dzn_MMR_fnc_unpackMagazine = compile preprocessFileLineNumbers "MMR\functions\fnc_unpackMagazine.sqf";
+dzn_MMR_fnc_resortBulkMagazines = compile preprocessFileLineNumbers "MMR\functions\fnc_resortBulkMagazines.sqf";
 
 */

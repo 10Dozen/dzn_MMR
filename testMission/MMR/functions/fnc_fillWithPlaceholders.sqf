@@ -26,18 +26,40 @@ player setVariable ["dzn_MMR_PlaceholderCount", 0];
 {
 	call compile format ["
 		private _attempts = 0;
+
+		player setVariable ['dzn_MMR_PlaceholderCount', 6];
+
+		player addItemTo%1 'dzn_Placeholder_Big';
+		player addItemTo%1 'dzn_Placeholder_Big';
+		player addItemTo%1 'dzn_Placeholder_Big';
+		player addItemTo%1 'dzn_Placeholder_Medium';
+		player addItemTo%1 'dzn_Placeholder_Medium';
+		player addItemTo%1 'dzn_Placeholder_Medium';
+
 		while { 
 			_attempts = _attempts + 1;
-			(load%1 player < 0.99) && _attempts < 150 
-		} do {			
+			(load%1 player < 0.99) && _attempts < 30 
+		} do {
+			player addItemTo%1 'dzn_Placeholder_Small';
 			player setVariable [
 				'dzn_MMR_PlaceholderCount'
 				, (player getVariable 'dzn_MMR_PlaceholderCount') + 1
 			];
-			player addItemTo%1 '%2';
 		};	
 	", _x
 	, _placeholder];
 } forEach _containers;
 
 (true)
+
+
+/*
+	dzn_Placeholder_Small:
+		mass = 2;
+
+	dzn_Placeholder_Medium
+		mass = 10;
+
+	dzn_Placeholder_Big
+		mass = 25;
+*/
