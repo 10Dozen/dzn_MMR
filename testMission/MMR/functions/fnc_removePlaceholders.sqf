@@ -24,4 +24,4 @@ for "_i" from 0 to (_count) do {
 	player removeItem "dzn_Placeholder_Small";
 };
 
-(true)
+player setVariable ["dzn_MMR_PlaceholderCount",0];

@@ -36,7 +36,7 @@ private _sourceMagPic = [_sourceMagClass, "picture"] call _getConfigText;
 private _sortedList = [];
 
 // 		Sorting -> Compatible mags -> [@Class, @Name, @Author, @Picture, @IsCompatible]
-private _compatibleMagazines = (getArray (configFile >> "CfgWeapons" >> primaryWeapon player >> "magazines")) apply { toLower _x };
+private _compatibleMagazines = call dzn_MMR_fnc_getCompatibleMagazines;
 {
 	if (_x in _mappedList) then {
 		_sortedList pushBack [

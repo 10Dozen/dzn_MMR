@@ -19,8 +19,11 @@ for "_i" from 0 to (count _allMagClasses)-1 do {
 	private _class = configName (_allMagClasses select _i);
 	
 	if (
-		[_classnameContaints, _class, false] call BIS_fnc_inString 
-		&& [_descriptionContaints, getText(configFile >> "CfgMagazines" >> _class >> "descriptionShort"), false] call BIS_fnc_inString 
+		getText (configFile >> "CfgMagazines" >> _class >> "picture") != ""
+		&& {
+			[_classnameContaints, _class, false] call BIS_fnc_inString 
+			&& [_descriptionContaints, getText(configFile >> "CfgMagazines" >> _class >> "descriptionShort"), false] call BIS_fnc_inString 
+		}
 	) then {
 		if (
 			( _tracersEvery == -1  && (getNumber (configFile >> "CfgMagazines" >> _class >> "tracersEvery")) in [0,2,3,4,5,6,7,8,9,10] )

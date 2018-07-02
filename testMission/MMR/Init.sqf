@@ -21,12 +21,16 @@ Pack to - открывает диалог где можно заряжать в�
 - Все эти трассеры ебаные будут теряться в конверсиях или наоборот - из рассыпухи обычных патронов можно собирать магазины с трассерами другого цвета
 
 ToDo:
-	[x]		ExchangeTo action for Primary, GLs and launchers
+	[ok]	ExchangeTo action for Primary, GLs and launchers
 	[ok]	Add BulkAmmo repack on UNPACK action
 	[ok]	Add Tracer bulk ammo type
 	[ok]	add additional placeholders classed (small and big mass) + rewrite fillWithPlaceholder function to make it faster + replace calls with spawns 
 	[ok]	Check unpack ammo saved 
-	[]		Add Pack for handgun compatible mags ammo exchange ?
+	[ok]	Add Pack for handgun compatible mags ammo exchange ?
+	[]		Add 9x21 vanilla ammo
+	[]		Add shotgun shell ammo
+	[]		
+	[]		Map MAAWS magazines
 */
 
 

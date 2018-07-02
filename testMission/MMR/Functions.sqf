@@ -7,6 +7,9 @@ COMPILE_FUNCTION(fnc_proccessMap);
 COMPILE_FUNCTION(fnc_getMapped);
 COMPILE_FUNCTION(fnc_isBulkAmmo);
 COMPILE_FUNCTION(fnc_getMappedBulkAmmo);
+COMPILE_FUNCTION(fnc_getCompatibleMagazines);
+
+
 COMPILE_FUNCTION(fnc_getMagazineByIndex);
 COMPILE_FUNCTION(fnc_getContainerLoadout);
 COMPILE_FUNCTION(fnc_getMagazinesAmmoFromContainer);
@@ -37,6 +40,6 @@ COMPILE_FUNCTION(fnc_getFilteredMagazines);
 /*
 
 dzn_MMR_fnc_unpackMagazine = compile preprocessFileLineNumbers "MMR\functions\fnc_unpackMagazine.sqf";
-dzn_MMR_fnc_resortBulkMagazines = compile preprocessFileLineNumbers "MMR\functions\fnc_resortBulkMagazines.sqf";
+dzn_MMR_fnc_removePlaceholders = compile preprocessFileLineNumbers "MMR\functions\fnc_removePlaceholders.sqf";
 
 */

@@ -24,19 +24,19 @@ private _dropdownItems = [];
 if (_class call dzn_MMR_fnc_isBulkAmmo) exitWith {
 
 	// PACK -> Check that player's current weapons any compatible magazine is in @MappedList of the Bulk Ammo
-	private _primaryCompatibleMapped = (getArray (configFile >> "CfgWeapons" >> primaryWeapon player >> "magazines")) select { (toLower _x) in _mappedList };
-
-	if !( _primaryCompatibleMapped isEqualTo [] ) then {
-		_comatibleMagazineToPack = _primaryCompatibleMapped select 0;
+	private _compatibleMagazines = (call dzn_MMR_fnc_getCompatibleMagazines) select { _x in _mappedList };
+	private _compatibleMagazineToPack = [];
+	if !( _compatibleMagazines isEqualTo [] ) then {
+		_compatibleMagazineToPack = _compatibleMagazines select 0;
+	};
 
 		_dropdownItems pushBack [
 			"Pack"
 			, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
-			, ["Pack_Bulk", _class, _itemIndex, _inventorySection, _comatibleMagazineToPack]
-			, true
+			, ["Pack_Bulk", _class, _itemIndex, _inventorySection, _compatibleMagazineToPack]
+			, !(_compatibleMagazines isEqualTo [])
 			, _xPos, _yPos
 		];
-	};
 
 	// PACK TO -> As bulk ammo has exchange option (true at this moment, because @MappedList already passed to current function)
 	_dropdownItems pushBack [

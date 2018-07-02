@@ -9,7 +9,6 @@
 		"Vest" call dzn_MMR_fnc_fillWithPlaceholders;
 */
 
-private _placeholder = "ItemWatch";
 private _containers = switch toLower(_this) do {
 	case "uniformonly":		{ ["Uniform"] };
 	case "vestonly":		{ ["Vest"] };

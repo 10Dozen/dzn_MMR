@@ -32,17 +32,7 @@ private _sourceMagPic = [_sourceMagClass, "picture"] call _getConfigText;
 private _sortedList = [];
 
 // 		Compatible items
-private _UGLmuzzle = (getArray(configFile >> "cfgWeapons" >> primaryWeapon player >> "muzzles")) - ["this","SAFE"];
-private _compatibleMagazines = [];
-{
-	_compatibleMagazines append ((getArray (configFile >> "CfgWeapons" >> _x >> "magazines")) apply { toLower _x });
-} forEach [
-	primaryWeapon player
-	, if (_UGLmuzzle isEqualTo []) then { "" } else { _UGLmuzzle select 0 }
-	, secondaryWeapon player
-	, handgunWeapon player
-];
-
+private _compatibleMagazines =  call dzn_MMR_fnc_getCompatibleMagazines;
 {
 	if (_x in _mappedList && _x != _sourceMagClass) then {
 		_sortedList pushBack [

@@ -102,10 +102,6 @@ dzn_MMR_Map = [
 , [
 	"dzn_10Rnd_762x51_Bulk"
 	,"20Rnd_762x51_Mag"
-	,"200Rnd_762x51_Belt"
-	,"200Rnd_762x51_Belt_Red"
-	,"200Rnd_762x51_Belt_Green"
-	,"200Rnd_762x51_Belt_Yellow"
 	,"CUP_20Rnd_762x51_FNFAL_M"
 	,"CUP_20Rnd_762x51_L129_M"
 	,"CUP_20Rnd_762x51_B_SCAR"
@@ -145,6 +141,8 @@ dzn_MMR_Map = [
 	,"ACE_20Rnd_762x51_Mk316_Mod_0_Mag"
 	,"ACE_20Rnd_762x51_Mk319_Mod_0_Mag"
 	,"ACE_20Rnd_762x51_M993_AP_Mag"
+	,"150Rnd_762x51_Box"
+	,"10Rnd_762x51_Mag"
 ]
 
 /*	7.62x51mm Tracers NATO */
@@ -241,9 +239,7 @@ dzn_MMR_Map = [
 /*	7.62x54mm Russian */
 , [
 	"dzn_10Rnd_762x54_Bulk"
-	,"150Rnd_762x51_Box"
 	,"150Rnd_762x54_Box"
-	,"10Rnd_762x51_Mag"
 	,"10Rnd_762x54_Mag"
 	,"CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M"
 	,"CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Red_M"
@@ -260,18 +256,6 @@ dzn_MMR_Map = [
 /*	7.62x54mm Tracer Russian */
 , [
 	"dzn_10Rnd_762x54_Bulk_Tracer"
-	,"CUP_200Rnd_TE1_White_Tracer_762x54_PKT_M"
-	,"CUP_200Rnd_TE1_Red_Tracer_762x54_PKT_M"
-	,"CUP_200Rnd_TE1_Yellow_Tracer_762x54_PKT_M"
-	,"CUP_200Rnd_TE1_Green_Tracer_762x54_PKT_M"
-	,"CUP_250Rnd_TE1_White_Tracer_762x54_PKT_M"
-	,"CUP_250Rnd_TE1_Red_Tracer_762x54_PKT_M"
-	,"CUP_250Rnd_TE1_Yellow_Tracer_762x54_PKT_M"
-	,"CUP_250Rnd_TE1_Green_Tracer_762x54_PKT_M"
-	,"CUP_100Rnd_TE1_White_Tracer_762x54_PKT_M"
-	,"CUP_100Rnd_TE1_Red_Tracer_762x54_PKT_M"
-	,"CUP_100Rnd_TE1_Yellow_Tracer_762x54_PKT_M"
-	,"CUP_100Rnd_TE1_Green_Tracer_762x54_PKT_M"
 	,"150Rnd_762x51_Box_Tracer"
 	,"150Rnd_762x54_Box_Tracer"
 	,"rhs_100Rnd_762x54mmR_green"
@@ -310,15 +294,33 @@ dzn_MMR_Map = [
 */
 
 /*	.45 ACP */
-/*
-[
-	"30Rnd_45ACP_Mag_SMG_01_Tracer_Green"
+, [
+	"dzn_10Rnd_45ACP_Bulk"
+	,"30Rnd_45ACP_Mag_SMG_01"
+	,"9Rnd_45ACP_Mag"
+	,"11Rnd_45ACP_Mag"
+	,"6Rnd_45ACP_Cylinder"
+	,"CUP_6Rnd_45ACP_M"
+	,"CUP_7Rnd_45ACP_1911"
+	,"rhsusf_mag_7x45acp_MHP"
+]
+
+/*	.45 ACP Tracer */
+, [
+	"dzn_10Rnd_45ACP_Tracer"
+	,"30Rnd_45ACP_Mag_SMG_01_Tracer_Green"
 	,"30Rnd_45ACP_Mag_SMG_01_Tracer_Red"
 	,"30Rnd_45ACP_Mag_SMG_01_Tracer_Yellow"
 ]
-*/
 
-/*	RPG-7 PG-7V
+, [
+	"1Rnd_HE_Grenade_shell"
+	,"CUP_6Rnd_HE_M203_heli"
+	,"CUP_6Rnd_HE_M203"
+	,"rhsusf_mag_6Rnd_M441_HE"
+]
+
+/*	RPG-7 PG-7V Exchange options
 	Mapping DOES NOT contain Bulk Ammo mapped.
 	All listed magazines (e.g. RPG7_F) may be exchanged to any listed magazine (e.g. rhs_rpg7_PG7VL_mag)
 
@@ -343,4 +345,8 @@ dzn_MMR_Bulk = [
 	,"dzn_10Rnd_762x54_Bulk"
 	,"dzn_10Rnd_762x54_Bulk_Tracer"
 	,"dzn_10Rnd_9x19_Bulk"
+	,"dzn_10Rnd_9x19_Bulk_Tracer"
+	,"dzn_10Rnd_45ACP_Bulk"
+	,"dzn_10Rnd_45ACP_Bulk_Tracer"
+	,"1Rnd_HE_Grenade_shell"
 ];
