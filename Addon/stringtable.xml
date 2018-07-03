@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="dzn_MMR">
+	<Package name="dzn_MMR">
+ 		<Container name="Locale">
+		
+		<!-- 
+			JS function to generate stringtable entities
+
+			fnc_makeStr = function (classtext, nameEn, nameRu, isTracer) {
+				console.log( 
+					'<Key ID="STR_MMR_' + classtext + '_Bulk' + (isTracer ? '_Tracer' : '') + '">'
+					+ "\n" + '	<Original>' + nameEn + 'mm Ammunition' + (isTracer ? ' (Tracer)' : '') + '</Original>'
+					+ "\n" + '	<Russian>' + nameRu + 'мм боеприпасы' + (isTracer ? ' (Трасс.)' : '') + '</Russian>'
+					+ "\n" + '</Key>'
+					+ "\n"
+					+ '<Key ID="STR_MMR_' + classtext + '_Bulk' + (isTracer ? '_Tracer' : '') + '_Desc">'
+					+ "\n" + '	<Original>Caliber: ' + nameEn + 'mm<br />Rounds: 10' + (isTracer ? '<br />Tracer rounds' : '') + '</Original>'
+					+ "\n" + '	<Russian>Калибр: ' + nameRu + 'мм<br />Патронов: 10' + (isTracer ? '<br />Трассирующие' : '') + '</Russian>'
+					+ "\n" + '</Key>'
+				);
+			};
+		
+		-->
+
+			<!-- 	Rifle ammunition	-->
+			<!-- 	5.56x45mm / NATO	-->
+			<Key ID="STR_MMR_556x45_Bulk">
+				<Original>5.56x45mm Ammunition</Original>
+				<Russian>5.56x45мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_556x45_Bulk_Desc">
+				<Original>Caliber: 5.56x45mm NATO<br />Rounds: 10</Original>
+				<Russian>Калибр: 5.56x45мм NATO<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_556x45_Bulk_Tracer">
+				<Original>5.56x45mm Ammunition (Tracer)</Original>
+				<Russian>5.56x45мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_556x45_Bulk_Tracer_Desc">
+				<Original>Caliber: 5.56x45mm NATO<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 5.56x45мм NATO<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	7.62x51mm / NATO	-->
+			<Key ID="STR_MMR_762x51_Bulk">
+				<Original>7.62x51mm Ammunition</Original>
+				<Russian>7.62x51мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x51_Bulk_Desc">
+				<Original>Caliber: 7.62x51mm NATO<br />Rounds: 10</Original>
+				<Russian>Калибр: 7.62x51мм NATO<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x51_Bulk_Tracer">
+				<Original>7.62x51mm Ammunition (Tracer)</Original>
+				<Russian>7.62x51мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x51_Bulk_Tracer_Desc">
+				<Original>Caliber: 7.62x51mm NATO<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 7.62x51мм NATO<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	5.45x39mm / Russian	-->
+			<Key ID="STR_MMR_545x39_Bulk">
+				<Original>5.45x39mm Ammunition</Original>
+				<Russian>5.45x39мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_545x39_Bulk_Desc">
+				<Original>Caliber: 5.45x39mm<br />Rounds: 10<br />For AK-74 family</Original>
+				<Russian>Калибр: 5.45x39мм<br />Патронов: 10<br />Для семейства АК-74</Russian>
+			</Key>
+			<Key ID="STR_MMR_545x39_Bulk_Tracer">
+				<Original>5.45x39mm Ammunition (Tracer)</Original>
+				<Russian>5.45x39мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_545x39_Bulk_Tracer_Desc">
+				<Original>Caliber: 5.45x39mm <br />Rounds: 10<br />Tracer rounds<br />For AK-74 family</Original>
+				<Russian>Калибр: 5.45x39мм<br />Патронов: 10<br />Трассирующие<br />Для семейства АК-74</Russian>
+			</Key>
+
+			<!-- 	7.62x39mm / Russian	-->
+			<Key ID="STR_MMR_762x39_Bulk">
+				<Original>7.62x39mm Ammunition</Original>
+				<Russian>7.62x39мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x39_Bulk_Desc">
+				<Original>Caliber: 7.62x39mm (Russian)<br />Rounds: 10<br />For AK/AKM family</Original>
+				<Russian>Калибр: 7.62x39мм<br />Патронов: 10<br />Для семейства АК/АКМ</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x39_Bulk_Tracer">
+				<Original>7.62x39mm Ammunition (Tracer)</Original>
+				<Russian>7.62x39мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x39_Bulk_Tracer_Desc">
+				<Original>Caliber: 7.62x39mm (Russian)<br />Rounds: 10<br />Tracer rounds<br />For AK/AKM family</Original>
+				<Russian>Калибр: 7.62x39мм<br />Патронов: 10<br />Трассирующиеbr />Для семейства АК/АКМ</Russian>
+			</Key>
+
+			<!-- 	7.62x54mmR / Russian	-->
+			<Key ID="STR_MMR_762x54_Bulk">
+				<Original>7.62x54mm Ammunition</Original>
+				<Russian>7.62x54мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x54_Bulk_Desc">
+				<Original>Caliber: 7.62x54mm (Russian)<br />Rounds: 10<br />For PKM and SVD</Original>
+				<Russian>Калибр: 7.62x54мм<br />Патронов: 10<br />Для ПКМ и СВД</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x54_Bulk_Tracer">
+				<Original>7.62x54mm Ammunition (Tracer)</Original>
+				<Russian>7.62x54мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_762x54_Bulk_Tracer_Desc">
+				<Original>Caliber: 7.62x54mm (Russian)<br />Rounds: 10<br />Tracer rounds<br />For PKM and SVD</Original>
+				<Russian>Калибр: 7.62x54мм<br />Патронов: 10<br />Трассирующие<br />Для ПКМ и СВД</Russian>
+			</Key>
+
+			<!-- 	9x19mm Para	-->
+			<Key ID="STR_MMR_9x19_Bulk">
+				<Original>9x19mm Ammunition</Original>
+				<Russian>9x19мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x19_Bulk_Desc">
+				<Original>Caliber: 9x19mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 9x19мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x19_Bulk_Tracer">
+				<Original>9x19mm Ammunition (Tracer)</Original>
+				<Russian>9x19мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x19_Bulk_Tracer_Desc">
+				<Original>Caliber: 9x19mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 9x19мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	.45ACP	-->
+			<Key ID="STR_MMR_45ACP_Bulk">
+				<Original>.45 ACP Ammunition</Original>
+				<Russian>.45 ACP боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_45ACP_Bulk_Desc">
+				<Original>Caliber: .45 ACP<br />Rounds: 10</Original>
+				<Russian>Калибр: .45 ACP<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_45ACP_Bulk_Tracer">
+				<Original>.45 ACP Ammunition (Tracer)</Original>
+				<Russian>.45 ACP боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_45ACP_Bulk_Tracer_Desc">
+				<Original>Caliber: .45 ACP<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: .45 ACP<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	9x21mm (Arma 3 only)	-->
+			<Key ID="STR_MMR_9x21_Bulk">
+				<Original>9x21mm Ammunition</Original>
+				<Russian>9x21мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x21_Bulk_Desc">
+				<Original>Caliber: 9x21mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 9x21мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x21_Bulk_Tracer">
+				<Original>9x21mm Ammunition (Tracer)</Original>
+				<Russian>9x21мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x21_Bulk_Tracer_Desc">
+				<Original>Caliber: 9x21mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 9x21мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	9x39mm SP-5	-->
+			<Key ID="STR_MMR_9x39_SP5_Bulk">
+				<Original>9x39mm SP-5 Ammunition</Original>
+				<Russian>9x39мм СП-5 боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x39_SP5_Bulk_Desc">
+				<Original>Caliber: 9x39mm SP-5<br />Rounds: 10<br />For VSS Vintorez and AS Val</Original>
+				<Russian>Калибр: 9x39мм СП-5<br />Патронов: 10<br />Для ВСС Винторез и АС Вал</Russian>
+			</Key>
+
+			<!-- 	9x39mm SP-6	-->
+			<Key ID="STR_MMR_9x39_SP6_Bulk">
+				<Original>9x39mm SP-6 Ammunition</Original>
+				<Russian>9x39мм СП-6 боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_9x39_SP6_Bulk_Desc">
+				<Original>Caliber: 9x39mm SP-6<br />Rounds: 10<br />For VSS Vintorez and AS Val</Original>
+				<Russian>Калибр: 9x39мм СП-6<br />Патронов: 10<br />Для ВСС Винторез и АС Вал</Russian>
+			</Key>
+
+			<!-- 	12 Gauge Pellets	-->
+			<Key ID="STR_MMR_12ga_Bulk">
+				<Original>12ga (Pellets) Ammunition</Original>
+				<Russian>12 кал. (Дробь) боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_12ga_Bulk_Desc">
+				<Original>Caliber: 12ga Pellets<br />Rounds: 10</Original>
+				<Russian>Калибр: 12 кал. Дробь<br />Патронов: 10</Russian>
+			</Key>
+
+			<!-- 	12 Gauge Slug	-->
+			<Key ID="STR_MMR_12slug_Bulk">
+				<Original>12ga (Slug) Ammunition</Original>
+				<Russian>12 кал. (Пуля) боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_12slug_Bulk_Desc">
+				<Original>Caliber: 12ga Slug<br />Rounds: 10</Original>
+				<Russian>Калибр: 12 кал. Пуля<br />Патронов: 10</Russian>
+			</Key>
+
+			<!-- 	Ammunition with placeholders	-->
+			<!-- 	6.5x39mm STANAG Caseless (MX rifles) (Arma 3)	-->
+			<Key ID="STR_MMR_65x39_NATO_Caseless_Bulk">
+				<Original>6.5x39mm Caseless Ammunition</Original>
+				<Russian>6.5x39мм Безгильзовые боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_NATO_Caseless_Bulk_Desc">
+				<Original>Caliber: 6.5x39mm Caseless NATO<br />Rounds: 10</Original>
+				<Russian>Калибр: 6.5x39мм Безгильзовые NATO<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_NATO_Caseless_Bulk_Tracer">
+				<Original>6.5x39mm Caseless Ammunition (Tracer)</Original>
+				<Russian>6.5x39мм Безгильзовые боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_NATO_Caseless_Bulk_Tracer_Desc">
+				<Original>Caliber: 6.5x39mm Caseless NATO<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 6.5x39мм Безгильзовые NATO<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	6.5x39mm CSAT Caseless (Arma 3)	/ 65x39_Caseless + T -->
+			<Key ID="STR_MMR_65x39_Caseless_Bulk">
+				<Original>6.5x39mm CSAT Caseless Ammunition</Original>
+				<Russian>6.5x39мм CSAT Безгильзовые боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_Caseless_Bulk_Desc">
+				<Original>Caliber: 6.5x39mm CSAT Caseless<br />Rounds: 10</Original>
+				<Russian>Калибр: 6.5x39мм CSAT Безгильзовые<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_Caseless_Bulk_Tracer">
+				<Original>6.5x39mm CSAT Caseless Ammunition (Tracer)</Original>
+				<Russian>6.5x39мм CSAT Безгильзовые боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_65x39_Caseless_Bulk_Tracer_Desc">
+				<Original>Caliber: 6.5x39mm CSAT Caseless<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 6.5x39мм CSAT Безгильзовые<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	5.8x42 mm (Arma 3) / 58x42 + T	-->
+			<Key ID="STR_MMR_58x42_Bulk">
+				<Original>5.8x42mm Ammunition</Original>
+				<Russian>5.8x42мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_58x42_Bulk_Desc">
+				<Original>Caliber: 5.8x42mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 5.8x42мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_58x42_Bulk_Tracer">
+				<Original>5.8x42mm Ammunition (Tracer)</Original>
+				<Russian>5.8x42мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_58x42_Bulk_Tracer_Desc">
+				<Original>Caliber: 5.8x42mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 5.8x42мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	9.3x64mm (Arma 3)  / 93x64 + T	-->
+			<Key ID="STR_MMR_93x64_Bulk">
+				<Original>9.3x64mm Ammunition</Original>
+				<Russian>9.3x64мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_93x64_Bulk_Desc">
+				<Original>Caliber: 9.3x64mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 9.3x64мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_93x64_Bulk_Tracer">
+				<Original>9.3x64mm Ammunition (Tracer)</Original>
+				<Russian>9.3x64мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_93x64_Bulk_Tracer_Desc">
+				<Original>Caliber: 9.3x64mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 9.3x64мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	12.7x54mm (Arma 3) / 127x54 + T 	-->
+			<Key ID="STR_MMR_127x54_Bulk">
+				<Original>12.7x54mm Ammunition</Original>
+				<Russian>12.7x54мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x54_Bulk_Desc">
+				<Original>Caliber: 12.7x54mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 12.7x54мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x54_Bulk_Tracer">
+				<Original>12.7x54mm Ammunition (Tracer)</Original>
+				<Russian>12.7x54мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x54_Bulk_Tracer_Desc">
+				<Original>Caliber: 12.7x54mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 12.7x54мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	338 Lapua / 338Lapua + T 	-->
+			<Key ID="STR_MMR_338Lapua_Bulk">
+				<Original>.338 Lapua Ammunition</Original>
+				<Russian>.338 Lapua боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_338Lapua_Bulk_Desc">
+				<Original>Caliber: .338 Lapua<br />Rounds: 10</Original>
+				<Russian>Калибр: .338 Lapua<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_338Lapua_Bulk_Tracer">
+				<Original>.338 Lapua Ammunition (Tracer)</Original>
+				<Russian>.338 Lapua боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_338Lapua_Bulk_Tracer_Desc">
+				<Original>Caliber: .338 Lapua<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: .338 Lapua<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	12.7x108mm R / 127x108 + T 	-->
+			<Key ID="STR_MMR_127x108_Bulk">
+				<Original>12.7x108mm Ammunition</Original>
+				<Russian>12.7x108мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x108_Bulk_Desc">
+				<Original>Caliber: 12.7x108mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 12.7x108мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x108_Bulk_Tracer">
+				<Original>12.7x108mm Ammunition (Tracer)</Original>
+				<Russian>12.7x108мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x108_Bulk_Tracer_Desc">
+				<Original>Caliber: 12.7x108mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 12.7x108мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	12.7x99mm NATO / 127x99 + T 	-->
+			<Key ID="STR_MMR_127x99_Bulk">
+				<Original>12.7x99mm Ammunition</Original>
+				<Russian>12.7x99мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x99_Bulk_Desc">
+				<Original>Caliber: 12.7x99mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 12.7x99мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x99_Bulk_Tracer">
+				<Original>12.7x99mm Ammunition (Tracer)</Original>
+				<Russian>12.7x99мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_127x99_Bulk_Tracer_Desc">
+				<Original>Caliber: 12.7x99mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 12.7x99мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+			<!-- 	4.6x30mm (MP7) / 46x30 + T 	-->
+			<Key ID="STR_MMR_46x30_Bulk">
+				<Original>4.6x30mm Ammunition</Original>
+				<Russian>4.6x30мм боеприпасы</Russian>
+			</Key>
+			<Key ID="STR_MMR_46x30_Bulk_Desc">
+				<Original>Caliber: 4.6x30mm<br />Rounds: 10</Original>
+				<Russian>Калибр: 4.6x30мм<br />Патронов: 10</Russian>
+			</Key>
+			<Key ID="STR_MMR_46x30_Bulk_Tracer">
+				<Original>4.6x30mm Ammunition (Tracer)</Original>
+				<Russian>4.6x30мм боеприпасы (Трасс.)</Russian>
+			</Key>
+			<Key ID="STR_MMR_46x30_Bulk_Tracer_Desc">
+				<Original>Caliber: 4.6x30mm<br />Rounds: 10<br />Tracer rounds</Original>
+				<Russian>Калибр: 4.6x30мм<br />Патронов: 10<br />Трассирующие</Russian>
+			</Key>
+
+
+
+			<!-- 
+			<Key ID="STR_Flares_H_Deviation">
+				<Original>Intensity deviation %</Original>
+				<Russian>Изменчивость яркости %</Russian>
+			</Key>
+			<Key ID="STR_Flares_H_Deviation_desc">
+				<Original>Light intensity deviation in time, percentage of intensity. Greater values means more noticible effect.</Original>
+				<Russian>Изменчивость яркости освещения во времени ("дрожание света") в процентах от яркости. Чем больше - тем более резкие колебания яркости.</Russian>
+			</Key>
+			
+			-->
+		</Container>
+	</Package>
+</Project>
