@@ -6,12 +6,13 @@
 	example:
 		[_this, "Uniform"] call dzn_MMR_fnc_uiHandleInvDoubleClick;
 */
+#include "..\macro.hpp"
 params["_event", "_inventorySection"];
 
 private _item = _event select 0;
 private _index = _event select 1;
 
-call dzn_MMR_fnc_uiHideDropdown;
+call GVAR(fnc_uiHideDropdown);
 
 private _idc = ctrlIDC _item;
 private _class = lbData [_idc, _index];
@@ -21,10 +22,10 @@ private _itemIndex = lbValue [_idc, _index];
 if (getText (configFile >> "CfgMagazines" >> _class >> "ammo") == "") exitWith {};
 
 // Check magazine has exchange options
-private _mappedList = _class call dzn_MMR_fnc_getMapped;
+private _mappedList = _class call GVAR(fnc_getMapped);
 if (_mappedList isEqualTo []) exitWith {};
 
 // Show dropdown
-[_item, _class, _itemIndex, _inventorySection, _mappedList] spawn dzn_MMR_fnc_uiShowInvDropdown;
+[_item, _class, _itemIndex, _inventorySection, _mappedList] spawn GVAR(fnc_uiShowInvDropdown);
 
 (true)

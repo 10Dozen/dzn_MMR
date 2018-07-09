@@ -9,11 +9,11 @@
 		["dzn_10Rnd_556x45_Bulk", 54, false] call dzn_MMR_fnc_resortBulkMagazines; // removes all mags and adds 5 full mags (10 rnds) + 1 partially loaded mag (4 rnd)
 		["dzn_10Rnd_556x45_Bulk"] call dzn_MMR_fnc_resortBulkMagazines; // calculates total ammo, then remove all mags and re-adds repacked
 */
-
+#include "..\macro.hpp"
 params ["_bulkClass", ["_totalBulkAmmo", -1], ["_needRemove", true]];
 
 private _bulkMagAmmo = getNumber (configFile >> "CfgMagazines" >> _bulkClass >> "count");
-private _bulkMagazines = [_bulkClass] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
+private _bulkMagazines = [_bulkClass] call GVAR(fnc_getMagazinesAmmoFromContainer);
 
 // Calculate total ammo if not passed
 if (_totalBulkAmmo < 0) then {
@@ -34,7 +34,7 @@ while { _totalBulkAmmo > 0 } do {
 	private _ammo = _totalBulkAmmo min _bulkMagAmmo;
 
 	if (_ammo > 0) then {
-		[_bulkClass, _ammo] call dzn_MMR_fnc_addMagazineSafe;
+		[_bulkClass, _ammo] call GVAR(fnc_addMagazineSafe);
 		_totalBulkAmmo = _totalBulkAmmo - _ammo;
 	};
 };

@@ -8,6 +8,7 @@
 	example:
 		"Vest" call dzn_MMR_fnc_fillWithPlaceholders;
 */
+#include "..\macro.hpp"
 
 private _containers = switch toLower(_this) do {
 	case "uniformonly":		{ ["Uniform"] };
@@ -21,12 +22,19 @@ private _containers = switch toLower(_this) do {
 
 if (_containers isEqualTo []) exitWith { (false) };
 
-player setVariable ["dzn_MMR_PlaceholderCount", 0];
+player setVariable [SVAR(PlaceholderCount), 0];
+
+/*
+	dzn_Placeholder_Small:		mass = 2;
+	dzn_Placeholder_Medium:		mass = 10;
+	dzn_Placeholder_Big:		mass = 25;
+*/
+
 {
 	call compile format ["
 		private _attempts = 0;
 
-		player setVariable ['dzn_MMR_PlaceholderCount', 6];
+		player setVariable ['%3', 6];
 
 		player addItemTo%1 'dzn_Placeholder_Big';
 		player addItemTo%1 'dzn_Placeholder_Big';
@@ -41,24 +49,14 @@ player setVariable ["dzn_MMR_PlaceholderCount", 0];
 		} do {
 			player addItemTo%1 'dzn_Placeholder_Small';
 			player setVariable [
-				'dzn_MMR_PlaceholderCount'
-				, (player getVariable 'dzn_MMR_PlaceholderCount') + 1
+				'%3'
+				, (player getVariable '%3') + 1
 			];
-		};	
-	", _x
-	, _placeholder];
+		};"
+		, _x
+		, _placeholder
+		, SVAR(PlaceholderCount)
+	];
 } forEach _containers;
 
 (true)
-
-
-/*
-	dzn_Placeholder_Small:
-		mass = 2;
-
-	dzn_Placeholder_Medium
-		mass = 10;
-
-	dzn_Placeholder_Big
-		mass = 25;
-*/

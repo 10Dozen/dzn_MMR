@@ -6,5 +6,6 @@
 	example:
 		_isBulk = "rhs_100Rnd_762x54mmR" call dzn_MMR_fnc_isBulkAmmo; // return: false
 */
+#include "..\macro.hpp"
 
-( toLower(_this) in dzn_MMR_Bulk )
+( toLower(_this) in GVAR(Bulk) )

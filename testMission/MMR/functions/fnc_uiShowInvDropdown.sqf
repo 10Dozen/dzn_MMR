@@ -11,6 +11,7 @@
 	example:
 		[_item, _class, _itemIndex, _inventorySection, _mappedList] call dzn_MMR_fnc_uiShowInvDropdown;
 */
+#include "..\macro.hpp"
 
 params ["_item", "_class", "_itemIndex", "_inventorySection", "_mappedList"];
 
@@ -21,18 +22,18 @@ private _dropdownItems = [];
 // BULK AMMO
 // 		PACK -> Check that bulk ammo can be exchanged to player's weapon 
 // 		PACK TO -> Chcek tha bulk ammo has any exchange option
-if (_class call dzn_MMR_fnc_isBulkAmmo) exitWith {
+if (_class call GVAR(fnc_isBulkAmmo)) exitWith {
 
 	// PACK -> Check that player's current weapons any compatible magazine is in @MappedList of the Bulk Ammo
-	private _compatibleMagazines = (call dzn_MMR_fnc_getCompatibleMagazines) select { _x in _mappedList };
+	private _compatibleMagazines = (call GVAR(fnc_getCompatibleMagazines)) select { _x in _mappedList };
 	private _compatibleMagazineToPack = [];
 	if !( _compatibleMagazines isEqualTo [] ) then {
 		_compatibleMagazineToPack = _compatibleMagazines select 0;
 	};
 
 		_dropdownItems pushBack [
-			"Pack"
-			, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
+			localize "STR_MMR_Dropdown_Pack" /* "Pack" */
+			, { _args call GVAR(fnc_uiHandleDropdownClick); }
 			, ["Pack_Bulk", _class, _itemIndex, _inventorySection, _compatibleMagazineToPack]
 			, !(_compatibleMagazines isEqualTo [])
 			, _xPos, _yPos
@@ -40,8 +41,8 @@ if (_class call dzn_MMR_fnc_isBulkAmmo) exitWith {
 
 	// PACK TO -> As bulk ammo has exchange option (true at this moment, because @MappedList already passed to current function)
 	_dropdownItems pushBack [
-		"Pack to"
-		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
+		localize "STR_MMR_Dropdown_PackTo" /* "Pack to" */
+		, { _args call GVAR(fnc_uiHandleDropdownClick); }
 		, ["Pack_to_Bulk", _class, _itemIndex, _inventorySection, _mappedList]
 		, true
 		, _xPos, _yPos + 0.05
@@ -50,11 +51,11 @@ if (_class call dzn_MMR_fnc_isBulkAmmo) exitWith {
 	// Add dropdown items
 	{
 		uiNamespace setVariable [
-			format ["dzn_MMR_Inventory_DropdownItem%1", _forEachIndex]
-			, _x call dzn_MMR_fnc_uiAddDropdownItem
+			format ["%1%2", SVAR(Inventory_DropdownItem), _forEachIndex]
+			, _x call GVAR(fnc_uiAddDropdownItem)
 		];
 	} forEach _dropdownItems;
-	uiNamespace setVariable ["dzn_MMR_Inventory_DropdownItemsCount", (count _dropdownItems) - 1];
+	uiNamespace setVariable [SVAR(Inventory_DropdownItemsCount), (count _dropdownItems) - 1];
 
 	(true)
 };
@@ -63,40 +64,40 @@ if (_class call dzn_MMR_fnc_isBulkAmmo) exitWith {
 // MAGAZINE (not a bulk ammo, but mapped to bulk ammo)
 // 		UNPACK -> Check magazine exchange options contain bulk ammo
 // 		PACK -> check is there are BulkAmmo in players inventory to pack magazine
-private _bulkAmmo = _mappedList call dzn_MMR_fnc_getMappedBulkAmmo;
+private _bulkAmmo = _mappedList call GVAR(fnc_getMappedBulkAmmo);
 if (_bulkAmmo != "") exitWith {
-
-	// UNPACK -> Check magazine exchange options contain bulk ammo
-	_dropdownItems pushBack [
-		"Unpack"
-		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
-		, ["Unpack_Mag", _class, _itemIndex, _inventorySection, _bulkAmmo]
-		, true
-		, _xPos, _yPos
-	];
 
 	// PACK -> check is there are BulkAmmo in players inventory to pack magazine
 	private _hasBulkAmmoAvailable = (_bulkAmmo in ((magazines player) apply { toLower _x }));
 	// Check selected magazine is not full
-	private _magAmmo = ([_inventorySection, _itemIndex] call dzn_MMR_fnc_getMagazineByIndex) select 1;
+	private _magAmmo = ([_inventorySection, _itemIndex] call GVAR(fnc_getMagazineByIndex)) select 1;
 	private _magAmmoFull = getNumber (configFile >> "CfgMagazines" >> _class >> "count");
 
 	_dropdownItems pushBack [
-		"Pack"
-		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
+		localize "STR_MMR_Dropdown_Pack" /* "Pack" */
+		, { _args call GVAR(fnc_uiHandleDropdownClick); }
 		, ["Pack_Mag", _class, _itemIndex, _inventorySection, _bulkAmmo]
 		, _hasBulkAmmoAvailable && (_magAmmo != _magAmmoFull)
+		, _xPos, _yPos
+	];
+
+	// UNPACK -> Check magazine exchange options contain bulk ammo
+	_dropdownItems pushBack [
+		localize "STR_MMR_Dropdown_Unpack" /* "Unpack" */
+		, { _args call GVAR(fnc_uiHandleDropdownClick); }
+		, ["Unpack_Mag", _class, _itemIndex, _inventorySection, _bulkAmmo]
+		, true
 		, _xPos, _yPos + 0.05
 	];
 
 	// Add dropdown items
 	{
 		uiNamespace setVariable [
-			format ["dzn_MMR_Inventory_DropdownItem%1", _forEachIndex]
-			, _x call dzn_MMR_fnc_uiAddDropdownItem
+			format ["%1%2", SVAR(Inventory_DropdownItem), _forEachIndex]
+			, _x call GVAR(fnc_uiAddDropdownItem)
 		];
 	} forEach _dropdownItems;
-	uiNamespace setVariable ["dzn_MMR_Inventory_DropdownItemsCount", (count _dropdownItems) - 1];
+	uiNamespace setVariable [SVAR(Inventory_DropdownItemsCount), (count _dropdownItems) - 1];
 
 	(true)
 };
@@ -107,13 +108,13 @@ if (_bulkAmmo != "") exitWith {
 uiNamespace setVariable [
 	"dzn_MMR_Inventory_DropdownItem0"
 	, [
-		"Exchange to"
-		, { _args call dzn_MMR_fnc_uiHandleDropdownClick; }
+		localize "STR_MMR_Dropdown_ExchangeTo" /* "Exchange to" */
+		, { _args call GVAR(fnc_uiHandleDropdownClick); }
 		, ["Exchange_to", _class, _itemIndex, _inventorySection, _mappedList]
 		, true
 		, _xPos, _yPos
-	] call dzn_MMR_fnc_uiAddDropdownItem
+	] call GVAR(fnc_uiAddDropdownItem)
 ];
-uiNamespace setVariable ["dzn_MMR_Inventory_DropdownItemsCount", 1];
+uiNamespace setVariable [SVAR(Inventory_DropdownItemsCount), 1];
 
 (true)

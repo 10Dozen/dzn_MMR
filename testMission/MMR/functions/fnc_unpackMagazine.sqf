@@ -10,17 +10,17 @@
 	example:
 		["30Rnd_556x45_Stanag", 22, "Vest", "dzn_10Rnd_556x45_Bulk"] call dzn_MMR_fnc_unpackMagazine;
 */
+#include "..\macro.hpp"
 
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_bulkClass"];
-dzn_unpack_log = [ _this ];
 
-private _magazines = [_sourceMagClass, _container] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
+private _magazines = [_sourceMagClass, _container] call GVAR(fnc_getMagazinesAmmoFromContainer);
 
 // Remove all magazines of unpacking class
-[_sourceMagClass, count _magazines, _container] call dzn_MMR_fnc_removeMagazinesFromContainer;
+[_sourceMagClass, count _magazines, _container] call GVAR(fnc_removeMagazinesFromContainer);
 
 // Add placeholders to add magazines to given container via addMagazine
-_container call dzn_MMR_fnc_fillWithPlaceholders;
+_container call GVAR(fnc_fillWithPlaceholders);
 
 private _modified = false;
 private _bulkAmmo = getNumber (configFile >> "CfgMagazines" >> _bulkClass >> "count");
@@ -54,11 +54,11 @@ private _bulkAmmoFinal = _bulkAmmo;
 } forEach _magazines;
 
 // Clear placeholders
-call dzn_MMR_fnc_removePlaceholders;
+call GVAR(fnc_removePlaceholders);
 
 // Safe add bulk ammo
-[_bulkClass, _bulkAmmoFinal] call dzn_MMR_fnc_addMagazineSafe;
+[_bulkClass, _bulkAmmoFinal] call GVAR(fnc_addMagazineSafe);
 
-[_bulkClass] call dzn_MMR_fnc_resortBulkMagazines;
+[_bulkClass] call GVAR(fnc_resortBulkMagazines);
 
 (true)

@@ -1,4 +1,5 @@
 /*
+	[DEPRECATED]
 	author: 10Dozen
 	description: Return list of magazines after filtering by classname, tracersEvery and scope = 2
 	input: ARRAY - 

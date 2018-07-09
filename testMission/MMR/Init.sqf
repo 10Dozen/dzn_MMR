@@ -1,27 +1,37 @@
 /*
 ToDo:
-	[]	Defaults mappings
+	[ok]	Defaults mappings
+	[+]		use macro accros functions
+	[+]		Add localization to Inventory dropdown items
+	[+]		Add localization to Pack To overlay
+	[+]		Add localization to Exchange To overlay
+	[]		Add localization to Hints
 */
+#include "macro.hpp"
 
-call compile preprocessFileLineNumbers "MMR\Mapping.sqf";
-call compile preprocessFileLineNumbers "MMR\Functions.sqf";
-call compile preprocessFileLineNumbers "MMR\Settings.sqf";
+call compile preprocessFileLineNumbers format ["%1\Mapping.sqf", PATH];
+call compile preprocessFileLineNumbers format ["%1\Functions.sqf", PATH];
 
 [] spawn {
-	waitUntil { !isNil "dzn_MMR_fnc_proccessMap" };
-	call dzn_MMR_fnc_proccessMap;
+	waitUntil { !isNil SVAR(fnc_proccessMap) };
+
+	call GVAR(fnc_proccessMap);
+	call compile preprocessFileLineNumbers format ["%1\Settings.sqf", PATH];
 
 	while {true} do {
-		waituntil {!(isnull (finddisplay 602))}; //waituntil inventory UI is opened
+		if !(GVAR(Enabled)) exitWith {};
 
-		((findDisplay 602) displayCtrl 633) ctrlSetEventHandler ["LBDblClick", "[_this, 'Uniform'] call dzn_MMR_fnc_uiHandleInvDoubleClick"];
-		((findDisplay 602) displayCtrl 638) ctrlSetEventHandler ["LBDblClick", "[_this, 'Vest'] call dzn_MMR_fnc_uiHandleInvDoubleClick"];  
-		((findDisplay 602) displayCtrl 619) ctrlSetEventHandler ["LBDblClick", "[_this, 'Backpack'] call dzn_MMR_fnc_uiHandleInvDoubleClick"];
+		//waituntil inventory UI is opened
+		waituntil {!(isNull (findDisplay 602))}; 
+
+		((findDisplay 602) displayCtrl 633) ctrlSetEventHandler ["LBDblClick", "[_this, 'Uniform'] call " + SVAR(fnc_uiHandleInvDoubleClick)];
+		((findDisplay 602) displayCtrl 638) ctrlSetEventHandler ["LBDblClick", "[_this, 'Vest'] call " + SVAR(fnc_uiHandleInvDoubleClick)];  
+		((findDisplay 602) displayCtrl 619) ctrlSetEventHandler ["LBDblClick", "[_this, 'Backpack'] call " + SVAR(fnc_uiHandleInvDoubleClick)];
 		
 		{
-			_x ctrlSetEventHandler ["MouseButtonClick", "call dzn_MMR_fnc_uiHideDropdown"];
+			_x ctrlSetEventHandler ["MouseButtonClick", "call " + SVAR(fnc_uiHideDropdown)];
 		} forEach allControls (findDisplay 602);
 		
-		waituntil {isnull (finddisplay 602)};
+		waituntil {isNull (findDisplay 602)};
 	};
 };

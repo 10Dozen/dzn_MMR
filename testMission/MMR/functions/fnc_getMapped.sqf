@@ -6,9 +6,10 @@
 	example:
 		_mappedList = "rhs_100Rnd_762x54mmR" call dzn_MMR_fnc_getMapped;
 */
+#include "..\macro.hpp"
 
 private _magToCheck = toLower _this;
-private _mapped = dzn_MMR_Map select { _magToCheck in _x };
+private _mapped = GVAR(Map) select { _magToCheck in _x };
 
 private _result = if (count _mapped > 0) then {
 	_mapped select 0

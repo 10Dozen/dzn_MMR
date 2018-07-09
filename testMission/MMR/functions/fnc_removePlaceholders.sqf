@@ -6,8 +6,8 @@
 	example:
 		call dzn_MMR_fnc_removePlaceholders;
 */
-
-private _count = (player getVariable ["dzn_MMR_PlaceholderCount",100]) + 6;
+#include "..\macro.hpp"
+private _count = (player getVariable [SVAR(PlaceholderCount),100]) + 6;
 
 player removeItem "dzn_Placeholder_Big";
 player removeItem "dzn_Placeholder_Big";
@@ -24,4 +24,4 @@ for "_i" from 0 to (_count) do {
 	player removeItem "dzn_Placeholder_Small";
 };
 
-player setVariable ["dzn_MMR_PlaceholderCount",0];
+player setVariable [SVAR(PlaceholderCount),0];

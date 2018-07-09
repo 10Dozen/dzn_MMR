@@ -6,8 +6,9 @@
 	example:
 		_hasBulkOption = _mappedList call dzn_MMR_fnc_getMappedBulkAmmo;
 */
+#include "..\macro.hpp"
 
-private _bulkAmmo = _this select { _x call dzn_MMR_fnc_isBulkAmmo };
+private _bulkAmmo = _this select { _x call GVAR(fnc_isBulkAmmo) };
 
 private _result = if (count _bulkAmmo > 0) then {
 	_bulkAmmo select 0

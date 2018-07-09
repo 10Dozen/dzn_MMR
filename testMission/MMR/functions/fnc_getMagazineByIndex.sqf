@@ -9,8 +9,10 @@
 		_item = ["Vest", 3] call dzn_MMR_fnc_getMagazineByIndex;
 */
 
+#include "..\macro.hpp"
+
 params ["_container", "_index"];
 
-private _loadout = _container call dzn_MMR_fnc_getContainerLoadout;
+private _loadout = _container call GVAR(fnc_getContainerLoadout);
 	
 (_loadout select _index)

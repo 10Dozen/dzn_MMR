@@ -1,6 +1,6 @@
 /*
 	author: 10Dozen
-	description: Pack new compatible magazine from selected bulk ammo
+	description: Pack new magazine from selected bulk ammo
 	input: ARRAY - 
 		0: STRING - source magazine classname
 		1: SCALAR - source magazine current ammo
@@ -11,12 +11,14 @@
 		["dzn_10Rnd_556x45_Bulk", 10, "Vest", "30Rnd_556x45_Stanag"] call dzn_MMR_fnc_packNewMagazine;
 */
 
+#include "..\macro.hpp"
+
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_targetMagClass"];
 
-private _magazines = [_sourceMagClass, _container] call dzn_MMR_fnc_getMagazinesAmmoFromContainer;
+private _magazines = [_sourceMagClass, _container] call GVAR(fnc_getMagazinesAmmoFromContainer);
 
 // Remove all magazines of unpacking/exchanging class
-[_sourceMagClass, count _magazines, _container] call dzn_MMR_fnc_removeMagazinesFromContainer;
+[_sourceMagClass, count _magazines, _container] call GVAR(fnc_removeMagazinesFromContainer);
 
 // Add placeholders to add magazines to given container via addMagazine
 _container call dzn_MMR_fnc_fillWithPlaceholders;
@@ -57,6 +59,6 @@ private _targetMagAmmoFinal = _sourceMagAmmo;
 call dzn_MMR_fnc_removePlaceholders;
 
 // Safe add target magazine
-[_targetMagClass, _targetMagAmmoFinal] call dzn_MMR_fnc_addMagazineSafe;
+[_targetMagClass, _targetMagAmmoFinal] call GVAR(fnc_addMagazineSafe);
 
 (true)

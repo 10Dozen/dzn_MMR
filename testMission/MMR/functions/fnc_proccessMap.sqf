@@ -6,11 +6,12 @@
 	example:
 		call dzn_MMR_fnc_proccessMap;
 */
+#include "..\macro.hpp"
 
 {
-	dzn_MMR_Map set [_forEachIndex, _x apply { toLower(_x) }]
-} forEach dzn_MMR_Map;
+	GVAR(Map) set [_forEachIndex, _x apply { toLower(_x) }]
+} forEach GVAR(Map);
 
-dzn_MMR_Bulk = dzn_MMR_Bulk apply { toLower _x };
+GVAR(Bulk) = GVAR(Bulk) apply { toLower _x };
 
 (true)

@@ -6,9 +6,10 @@
 	example:
 		call dzn_MMR_fnc_uiHideDropdown;
 */
+#include "..\macro.hpp"
 
-for "_i" from 0 to (uiNamespace getVariable ["dzn_MMR_Inventory_DropdownItemsCount", 0]) do {
-	ctrlDelete (uiNamespace getVariable format ["dzn_MMR_Inventory_DropdownItem%1", _i]);
+for "_i" from 0 to (uiNamespace getVariable [SVAR(Inventory_DropdownItemsCount), 0]) do {
+	ctrlDelete (uiNamespace getVariable format ["%1%2", SVAR(Inventory_DropdownItem), _i]);
 };
 
 (true)

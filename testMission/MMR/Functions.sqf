@@ -1,5 +1,6 @@
-#define PATH                    "MMR\functions\"
-#define COMPILE_FUNCTION(X)     dzn_MMR_##X = compile preprocessFileLineNumbers format ["%1%2.sqf", PATH, #X]
+#include "macro.hpp"
+#define FNC_PATH                "MMR\functions\"
+#define COMPILE_FUNCTION(X)     dzn_MMR_##X = compile preprocessFileLineNumbers format ["%1%2.sqf", FNC_PATH, #X]
 
 // Utility functions
 COMPILE_FUNCTION(fnc_proccessMap);
@@ -37,11 +38,5 @@ COMPILE_FUNCTION(fnc_getFilteredMagazines);
 COMPILE_FUNCTION(fnc_getFilteredMagsByClass);
 COMPILE_FUNCTION(fnc_uiShowMMRConfigMenu);
 
-
-
-/*
-
-dzn_MMR_fnc_uiShowMMRConfigMenu = compile preprocessFileLineNumbers "MMR\functions\fnc_uiShowMMRConfigMenu.sqf";
-dzn_MMR_fnc_getFilteredMagsByClass = compile preprocessFileLineNumbers "MMR\functions\fnc_getFilteredMagsByClass.sqf";
-
-*/
+// Shortcut
+GVAR(MMRC) = GVAR(fnc_uiShowMMRConfigMenu);

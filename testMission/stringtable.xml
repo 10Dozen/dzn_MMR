@@ -2,6 +2,7 @@
 <Project name="dzn_MMR">
 	<Package name="dzn_MMR">
  		<Container name="Menus">
+			<!-- Settings labels -->
 			<Key ID="STR_MMR_Enabled">
 				<Original>Enabled</Original>
 				<Russian>Включить</Russian>
@@ -45,6 +46,73 @@
 			<Key ID="STR_MMR_ExtraMapSettings_desc">
 				<Original>Use for creating "Exchange To" options for specific magazines (e.g. PG-7 grenades from different mods). In format [@MagA1,@MagA2,@MagA3], [@MagB1,@MagB2,@MagB3]</Original>
 				<Russian>Используйте для создания опций "обмена" специфических магазинов (например, гранаты ПГ-7 из разных модов). В формате [@MagA1,@MagA2,@MagA3], [@MagB1,@MagB2,@MagB3]</Russian>
+			</Key>
+
+			<!-- In-game labels -->
+			<!-- Inventory dropdown -->
+			<Key ID="STR_MMR_Dropdown_Pack">
+				<Original>Pack</Original>
+				<Russian>Снарядить</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_Unpack">
+				<Original>Unpack</Original>
+				<Russian>Разрядить</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_PackTo">
+				<Original>Pack to ...</Original>
+				<Russian>Снарядить в</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_ExchangeTo">
+				<Original>Exchange to</Original>
+				<Russian>Сменить на</Russian>
+			</Key>
+
+			<!-- Overlay general -->
+			<Key ID="STR_MMR_Overlay_CancelBtn">
+				<Original>CANCEL</Original> 
+				<Russian>ОТМЕНА</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_NotCompatibleLabel">
+				<Original>Not compatible</Original>
+				<Russian>Не совместим</Russian>
+			</Key>
+
+			<!-- Pack To Overlay -->
+			<Key ID="STR_MMR_Overlay_PackTo">
+				<Original>Pack to ...</Original> 
+				<Russian>Снарядить в ...</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_PackToLabel">
+				<Original>Pack to</Original> 
+				<Russian>Снарядить в</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_PackToBtn">
+				<Original>PACK TO</Original> 
+				<Russian>СНАРЯДИТЬ</Russian>
+			</Key>
+
+			<!-- Exchange To Overlay -->
+			<Key ID="STR_MMR_Overlay_ExchangeTo">
+				<Original>Exchange To ...</Original> 
+				<Russian>Сменить на ...</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_ExchangeToLabel">
+				<Original>Exchange to</Original> 
+				<Russian>Сменить на</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_ExchangeToBtn">
+				<Original>EXCHANGE TO</Original> 
+				<Russian>СМЕНИТЬ НА</Russian>
+			</Key>
+
+			<!-- Hints -->
+			<Key ID="STR_MMR_Hint_MagazineDropped">
+				<Original>%1 dropped</Original> 
+				<Russian>%1 сброшен</Russian>
+			</Key>
+			<Key ID="STR_MMR_Hint_MagazineToVehicle">
+				<Original>%1 dropped to vehicle</Original> 
+				<Russian>%1 сброшен в технику</Russian>
 			</Key>
         </Container>
 	</Package>

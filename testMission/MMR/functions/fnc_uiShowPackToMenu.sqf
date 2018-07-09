@@ -20,6 +20,7 @@
 			]
 		] call dzn_MMR_fnc_uiShowPackToMenu;
 */
+#include "..\macro.hpp"
 
 params ["_sourceMagClass", "_sourceMagAmmo", "_container", "_mappedList"];
 
@@ -29,20 +30,20 @@ private _getConfigText = {
 	( getText (configFile >> "CfgMagazines" >> _class >> _par) ) 
 };
 
-private _sourceMagDisplayName = [[_sourceMagClass, "displayName"] call _getConfigText, "SPLIT_LINES"] call dzn_MMR_fnc_formatStrings;;
+private _sourceMagDisplayName = [[_sourceMagClass, "displayName"] call _getConfigText, "SPLIT_LINES"] call GVAR(fnc_formatStrings);
 private _sourceMagPic = [_sourceMagClass, "picture"] call _getConfigText;
 
 // 		Getting sorted Pack to options
 private _sortedList = [];
 
 // 		Sorting -> Compatible mags -> [@Class, @Name, @Author, @Picture, @IsCompatible]
-private _compatibleMagazines = call dzn_MMR_fnc_getCompatibleMagazines;
+private _compatibleMagazines = call GVAR(fnc_getCompatibleMagazines);
 {
 	if (_x in _mappedList) then {
 		_sortedList pushBack [
 			_x
 			, [_x, "displayName"] call _getConfigText
-			, [[_x, "author"] call _getConfigText, "ACRONYM"] call dzn_MMR_fnc_formatStrings
+			, [[_x, "author"] call _getConfigText, "ACRONYM"] call GVAR(fnc_formatStrings)
 			, [_x, "picture"] call _getConfigText
 			, true
 		];
@@ -62,11 +63,11 @@ _list sort true;
 	_x params ["_author", "_displayName", "_classname"];
 
 	// Do not add items without display name (means, that mod is not launched now)
-	if (_displayName != "" && !(_classname in dzn_MMR_Bulk)) then {		
+	if (_displayName != "" && !(_classname in GVAR(Bulk)) ) then {		
 		_sortedList pushBack [
 			_classname
 			, _displayName
-			, [_author, "ACRONYM"] call dzn_MMR_fnc_formatStrings
+			, [_author, "ACRONYM"] call GVAR(fnc_formatStrings)
 			, [_classname, "picture"] call _getConfigText
 			, false
 		];
@@ -80,10 +81,10 @@ createDialog "dzn_MMR_Group";
 private _display = (findDisplay 192005);
 
 // 		Static contend
-(_display displayCtrl 5101) ctrlSetStructuredText parseText format ["<t font='PuristaMedium'>%1</t>", "Pack To..."];
+(_display displayCtrl 5101) ctrlSetStructuredText parseText format ["<t font='PuristaMedium'>%1</t>", localize "STR_MMR_Overlay_PackTo"];  /* "Pack To..." */
 (_display displayCtrl 5106) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", _sourceMagDisplayName];
 (_display displayCtrl 5105) ctrlSetText _sourceMagPic;
-(_display displayCtrl 5110) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", "Pack to"];
+(_display displayCtrl 5110) ctrlSetStructuredText parseText format ["<t font='PuristaLight'>%1</t>", localize "STR_MMR_Overlay_PackToLabel"]; /* "Pack to" */
 
 // 		Dropdown
 private _dropdown = (_display displayCtrl 5109);
@@ -94,7 +95,12 @@ private _dropdown = (_display displayCtrl 5109);
 	_dropdown lbSetData [_forEachIndex, _itemClass];
 	_dropdown lbSetTooltip [
 		_forEachIndex
-		, if (_isCompatible) then { _itemDisplayName } else { format ["[Not compatible] %1", _itemDisplayName] }
+		, if (_isCompatible) then { 
+			_itemDisplayName 
+		} else { 
+			/* [Not compatible] MagazineName */
+			format ["[%2] %1", _itemDisplayName, localize "STR_MMR_Overlay_NotCompatibleLabel"] 
+		}
 	];
 
 	_dropdown lbSetTextRight [_forEachIndex, _itemAuthor];
@@ -103,25 +109,24 @@ private _dropdown = (_display displayCtrl 5109);
 	if (!_isCompatible) then { _dropdown lbSetColor [_forEachIndex, [1, 1, 1, 0.5]]; };
 } forEach _sortedList;
 
-_dropdown ctrlSetEventHandler ["LBSelChanged", "_this call dzn_MMR_fnc_uiOnLBSelChanged"];
+_dropdown ctrlSetEventHandler ["LBSelChanged", format ["_this call %1", SVAR(fnc_uiOnLBSelChanged)]];
 _dropdown lbSetCurSel 0;
 
 // 		Buttons CANCEL and PACK TO
-(_display displayCtrl 5103) ctrlSetText "CANCEL";
+(_display displayCtrl 5103) ctrlSetText localize "STR_MMR_Overlay_CancelBtn"; /* "CANCEL" */
 (_display displayCtrl 5103) ctrlSetEventHandler ["ButtonClick", "closeDialog 2"];
 
-(_display displayCtrl 5104) ctrlSetText "PACK TO";
+(_display displayCtrl 5104) ctrlSetText localize "STR_MMR_Overlay_PackToBtn";/* "PACK TO" */
 (_display displayCtrl 5104) ctrlSetEventHandler [
 	"ButtonClick"
 	, format ["
 		private _targetClass = ((findDisplay 192005) displayCtrl 5109) lbData (lbCurSel ((findDisplay 192005) displayCtrl 5109));
 
-		DZN_PACKTO = [""%1"", %2, ""%3"", _targetClass];
-
-		[""%1"", %2, ""%3"", _targetClass] call dzn_MMR_fnc_packNewMagazine;
+		[""%1"", %2, ""%3"", _targetClass] call %4;
 		closeDialog 2;"
 		, _sourceMagClass
 		, _sourceMagAmmo
 		, _container
+		, SVAR(fnc_packNewMagazine)
 	]
 ];
