@@ -4,6 +4,7 @@
 	input: none
 	returns: nothing
 	example:
+		call dzn_MMR_fnc_proccessMap;
 */
 
 {

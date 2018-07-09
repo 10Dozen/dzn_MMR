@@ -1,6 +1,6 @@
 /*
 	author: 10Dozen
-	description: Handles "Inventory dialog - Item - Double click ("LBDblClick")" UI event from UIEventHandler and draw dropdown with buttons if necessary
+	description: Return array of mapped magazines of given classname. Or empty array if none.
 	input: STRING - classname of the magazine to check
 	returns: ARRAY of mapping or [] if not mapped
 	example:

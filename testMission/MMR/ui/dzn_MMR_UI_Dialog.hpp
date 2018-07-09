@@ -13,11 +13,10 @@ class dzn_MMR_Group: RscControlsGroup
 	y = 7 * GUI_GRID_H + GUI_GRID_Y;
 	w = 28 * GUI_GRID_W;
 	h = 8 * GUI_GRID_H;
-	colorBackground[] = {0,0,0,.75};
-	/* onLoad = "[] spawn { uiSleep 0.01; call dzn_CG_fnc_restoreLastExecutedAndWatch;};" */
+	colorBackground[] = {0,0,0,0.75};
 	
 	class controls
-	{
+	{	
 		// HEADER & BACKGROUND
 		class dzn_MMR_UI_Header: RscStructuredText
 		{
@@ -38,7 +37,7 @@ class dzn_MMR_Group: RscControlsGroup
 			y = 7 * GUI_GRID_H + GUI_GRID_Y;
 			w = 28 * GUI_GRID_W;
 			h = 8 * GUI_GRID_H;
-			colorBackground[] = {0,0,0,.5};
+			colorBackground[] = {0,0,0,0.5};
 			style=0;
 		};
 

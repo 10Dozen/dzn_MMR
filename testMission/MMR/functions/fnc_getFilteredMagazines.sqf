@@ -6,8 +6,8 @@
 		1: SCALAR - tracers every in mag's config
 	returns: ARRAY - list of filtered magazines
 	example:
-		_nonTracerMags = ["556x45", 0] call dzn_MMR_fnc_getFilteredMagazines;
-		_tracerMags = ["556x45", 1] call dzn_MMR_fnc_getFilteredMagazines;
+		_nonTracerMags = ["556x45", "5.56", 0] call dzn_MMR_fnc_getFilteredMagazines;
+		_tracerMags = ["556x45", "", 1] call dzn_MMR_fnc_getFilteredMagazines;
 */
 
 params ["_classnameContaints", ["_descriptionContaints",""], ["_tracersEvery",-1]];

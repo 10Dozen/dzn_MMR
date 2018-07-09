@@ -320,33 +320,17 @@ dzn_MMR_Map = [
 	,"rhsusf_mag_6Rnd_M441_HE"
 ]
 
-/*	RPG-7 PG-7V Exchange options
+/*	RPG-7 PG-7V Exchange options example
 	Mapping DOES NOT contain Bulk Ammo mapped.
 	All listed magazines (e.g. RPG7_F) may be exchanged to any listed magazine (e.g. rhs_rpg7_PG7VL_mag)
 
-*/
+
 ,[
 	"RPG7_F"
 	, "rhs_rpg7_PG7V_mag"
 ]
-
+*/
 
 ];
 
-dzn_MMR_Bulk = [
-	"dzn_10Rnd_556x45_Bulk"
-	,"dzn_10Rnd_556x45_Bulk_Tracer"
-	,"dzn_10Rnd_762x51_Bulk"
-	,"dzn_10Rnd_762x51_Bulk_Tracer"
-	,"dzn_10Rnd_545x39_Bulk"
-	,"dzn_10Rnd_545x39_Bulk_Tracer"
-	,"dzn_10Rnd_762x39_Bulk"
-	,"dzn_10Rnd_762x39_Bulk_Tracer"
-	,"dzn_10Rnd_762x54_Bulk"
-	,"dzn_10Rnd_762x54_Bulk_Tracer"
-	,"dzn_10Rnd_9x19_Bulk"
-	,"dzn_10Rnd_9x19_Bulk_Tracer"
-	,"dzn_10Rnd_45ACP_Bulk"
-	,"dzn_10Rnd_45ACP_Bulk_Tracer"
-	,"1Rnd_HE_Grenade_shell"
-];
+dzn_MMR_Bulk = getArray (configFile >> "CfgPatches" >> "dzn_MMR" >> "magazines") + ["Exchange_Mapping_Placeholder"];
