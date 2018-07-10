@@ -16,6 +16,7 @@ No. | Ammo
 - [] (? Magazine Management) Add saving of the empty magazines
 - [] (? Magazine Management) Add logic of new magazine paking (if bulk mapped to magazine without container, e.g. sniper ammo - pack makes new magazine; if mapped to box magazine - deny packing from bulk and allow pack action on empty magazine)
 - [] (? Magazine Management) Add empty magazine classes:
+
 No. | Magazine
 --- | ----
 []  | 5.56x45mm 30Rnd STANAG Mag (empty)
