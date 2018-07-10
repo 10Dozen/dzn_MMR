@@ -1,5 +1,5 @@
-#define LIST(NAME)		QUOTE(dzn_10Rnd_##NAME##_Bulk)
-#define	LIST_T(NAME)	QUOTE(dzn_10Rnd_##NAME##_Bulk_Tracer)
+#define LIST(NAME)		dzn_10Rnd_##NAME##_Bulk
+#define	LIST_T(NAME)	dzn_10Rnd_##NAME##_Bulk_Tracer
 
 class CfgPatches
 {
@@ -66,6 +66,18 @@ class CfgPatches
 	};
 };
 
+class Extended_PreInit_EventHandlers
+{
+	class dzn_MMR_PreInit
+	{
+		init = "call ('\dzn_MMR\Init.sqf' call SLX_XEH_COMPILE)";
+	};
+};
+
+#include "ui\baseDialogClasses.hpp"
+#include "ui\dzn_MMR_UI_Dialog.hpp"
+#include "ui\dzn_MMR_UI_Map.hpp"
+
 class CfgWeapons
 {
 	#define PH_MASS(X)		class ItemInfo { mass = X; }
@@ -92,8 +104,6 @@ class CfgWeapons
  
 class CfgMagazines
 {
-	#define	MASS_BOX	120
-
 	class 30Rnd_556x45_Stanag;
 	class dzn_Default_Bulk: 30Rnd_556x45_Stanag
 	{
@@ -110,260 +120,149 @@ class CfgMagazines
 	};
 
 	// Macroses
-	#define MMR_CLASS(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
+	#define MMR_CLASS(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk; \
 		descriptionShort = $STR_MMR_##NAME##_Bulk_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\NAME##_Bulk.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
-	#define MMR_CLASS_T(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk_Tracer \
+	#define MMR_CLASS_T(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk_Tracer \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk_Tracer; \
-		descriptionShort = $STR_MMR_##NAME##_Bulk_Desc; \
+		descriptionShort = $STR_MMR_##NAME##_Bulk_Tracer_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\NAME##_Bulk_Tracer.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
 
 	// 	Rifle ammunition
 	//	5.56x45mm / NATO 
-	MMR_CLASS(556x45, 3);
-	MMR_CLASS_T(556x45, 3);
+	MMR_CLASS(556x45, 3, 5.56|5.56x45);
+	MMR_CLASS_T(556x45, 3, 5.56|5.56x45);
 
 	//	7.62x51mm / NATO
-	MMR_CLASS(762x51, 4.5);
-	MMR_CLASS_T(762x51, 4.5);
+	MMR_CLASS(762x51, 4.5, 7.62x51);
+	MMR_CLASS_T(762x51, 4.5, 7.62x51);
 
 	//	5.45x39mm / Russian
-	MMR_CLASS(545x39, 3);
-	MMR_CLASS_T(545x39, 3);
+	MMR_CLASS(545x39, 3, 5.45|5.45x39);
+	MMR_CLASS_T(545x39, 3, 5.45|5.45x39);
 
 	//	7.62x39mm / Russian
-	MMR_CLASS(762x39, 4);
-	MMR_CLASS_T(762x39, 4);
+	MMR_CLASS(762x39, 4, 7.62x39);
+	MMR_CLASS_T(762x39, 4, 7.62x39);
 
 	//	7.62x54mmR / Russian
-	MMR_CLASS(762x54, 4.5);
-	MMR_CLASS_T(762x54, 4.5);
+	MMR_CLASS(762x54, 4.5, 7.62x54);
+	MMR_CLASS_T(762x54, 4.5, 7.62x54);
 
 	//	Pistol ammunition
 	//	9x19mm Para
-	MMR_CLASS(9x19, 2);
-	MMR_CLASS_T(9x19, 2);
+	MMR_CLASS(9x19, 2, 9x19|Para);
+	MMR_CLASS_T(9x19, 2, 9x19|Para);
 
 	//	.45ACP
-	MMR_CLASS(45ACP, 2.5);
-	MMR_CLASS_T(45ACP, 2.5);
+	MMR_CLASS(45ACP, 2.5, .45|ACP);
+	MMR_CLASS_T(45ACP, 2.5, .45|ACP);
 
 	//	9x21mm (Arma 3 only)
-	MMR_CLASS(9x21, 2);
-	MMR_CLASS_T(9x21, 2);
+	MMR_CLASS(9x21, 2, 9x21mm);
+	MMR_CLASS_T(9x21, 2, 9x21mm);
 
 	//	Other ammunition (sniper, shotgun, caseless, etc.)
 	//	9x39mm SP-5
-	MMR_CLASS(9x39_SP5, 4);
+	MMR_CLASS(9x39_SP5, 4, 9x39mm|SP5|SP-5|СП-5|СП5);
 
 	//	9x39mm SP-6
-	MMR_CLASS(9x39_SP6, 4);
+	MMR_CLASS(9x39_SP6, 4, 9x39mm|SP6|SP-6|СП-6|СП6);
 
 	//	12 Gauge Pellets
-	MMR_CLASS(12ga, 3);
+	MMR_CLASS(12ga, 3, Pellets|Buckshot|Дробь);
 
 	//	12 Gauge Slug
-	MMR_CLASS(12slug, 3);
+	MMR_CLASS(12slug, 3, Slug|Пуля);
 
 	//	Ammunition with placeholders
 	//	Macroses
-	#define MMR_PH_CASED(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
+	#define MMR_PH_CASED(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk; \
 		descriptionShort = $STR_MMR_##NAME##_Bulk_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\Placeholder_Cased.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
-	#define MMR_PH_CASED_T(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk \
+	#define MMR_PH_CASED_T(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk_Tracer \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk_Tracer; \
 		descriptionShort = $STR_MMR_##NAME##_Bulk_Tracer_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\Placeholder_Cased.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
-	#define MMR_PH_CASELESS(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
+	#define MMR_PH_CASELESS(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk: dzn_Default_Bulk \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk; \
 		descriptionShort = $STR_MMR_##NAME##_Bulk_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\Placeholder_Caseless.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
-	#define MMR_PH_CASELESS_T(NAME,MASS)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk \
+	#define MMR_PH_CASELESS_T(NAME,MASS,FILTER)	class dzn_10Rnd_##NAME##_Bulk_Tracer: dzn_Default_Bulk_Tracer \
 	{ \
 		scope = 2; \
 		displayName = $STR_MMR_##NAME##_Bulk_Tracer; \
 		descriptionShort = $STR_MMR_##NAME##_Bulk_Tracer_Desc; \
 		mass = MASS; \
 		picture = \dzn_MMR\icon\Placeholder_Caseless.paa; \
+		dzn_MMR_searchFilter = NAME|FILTER; \
 	}
 	
 	//	6.5x39mm STANAG Caseless (MX rifles) (Arma 3)
-	MMR_PH_CASELESS(65x39_NATO_Caseless, 2);
-	MMR_PH_CASELESS_T(65x39_NATO_Caseless, 2);
+	MMR_PH_CASELESS(65x39_NATO_Caseless, 2, 6.5x39);
+	MMR_PH_CASELESS_T(65x39_NATO_Caseless, 2, 6.5x39);
 
 	//	6.5x39mm CSAT Caseless (Arma 3)
-	MMR_PH_CASELESS(65x39_Caseless, 2);
-	MMR_PH_CASELESS_T(65x39_Caseless, 2);
+	MMR_PH_CASELESS(65x39_Caseless, 2, 6.5x39);
+	MMR_PH_CASELESS_T(65x39_Caseless, 2, 6.5x39);
 
 	//	5.8x42 mm (Arma 3)
-	MMR_PH_CASED(58x42,3.5);
-	MMR_PH_CASED_T(58x42,3.5);
+	MMR_PH_CASED(58x42, 3.5, 5.8x42);
+	MMR_PH_CASED_T(58x42, 3.5, 5.8x42);
 	
 	// 	9.3x64mm (Arma 3)
-	MMR_PH_CASED(93x64,4.5);
-	MMR_PH_CASED_T(93x64,4.5);
+	MMR_PH_CASED(93x64, 4.5, 9.3x64);
+	MMR_PH_CASED_T(93x64, 4.5, 9.3x64);
 
 	//	12.7x54mm (Arma 3)
-	MMR_PH_CASED(127x54,5);
-	MMR_PH_CASED_T(127x54,5);
+	MMR_PH_CASED(127x54, 5, 12.7x54);
+	MMR_PH_CASED_T(127x54, 5, 12.7x54);
 
 	//	.338 Lapua
-	MMR_PH_CASED(338Lapua,3.5);
-	MMR_PH_CASED_T(338Lapua,3.5);
+	MMR_PH_CASED(338Lapua, 3.5, .338|Lapua);
+	MMR_PH_CASED_T(338Lapua, 3.5, .338|Lapua);
 
 	//	12.7x108mm R
-	MMR_PH_CASED(127x108,6);
-	MMR_PH_CASED_T(127x108,6);
+	MMR_PH_CASED(127x108, 6, 12.7x108);
+	MMR_PH_CASED_T(127x108, 6, 12.7x108);
 
 	//	12.7x99mm NATO
-	MMR_PH_CASED(127x99,6);
-	MMR_PH_CASED_T(127x99,6);
+	MMR_PH_CASED(127x99, 6, .50|12.7x99|BMG);
+	MMR_PH_CASED_T(127x99, 6, .50|12.7x99|BMG);
 
 	//	4.6x30mm (MP7)
-	MMR_PH_CASED(46x30,2);
-	MMR_PH_CASED_T(46x30,2);
+	MMR_PH_CASED(46x30, 2, 4.6);
+	MMR_PH_CASED_T(46x30, 2, 4.6);
 
 };
 
-
-
-
-/*
-	//	5.56x45mm / NATO 
-	class dzn_10Rnd_556x45_Bulk: 30Rnd_556x45_Stanag
-	{
-		author = "10Dozen";
-		count = 10;
-		displayName = "5.56x45mm Ammunition";
-		descriptionShort = "Caliber: 5.56x45mm<br />Rounds: 10";
-		picture = "\dzn_MMR\icon\556x45mm_Bulk.paa";		
-		scope = 2;
-		mass = 3;
-		dzn_ammoType = "BALL";
-	};
-	class dzn_10Rnd_556x45_Bulk_Tracer: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "5.56x45mm Ammunition (Tracers)";
-		descriptionShort = "Caliber: 5.56x45mm<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\556x45mm_Bulk_Tracer.paa";
-		tracersEvery = 1;
-	};
-
-	//	7.62x51mm / NATO
-	class dzn_10Rnd_762x51_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "7.62x51mm Ammunition";
-		descriptionShort = "Caliber: 7.62x51mm<br />Rounds: 10";
-		mass = 4.5;
-		picture = "\dzn_MMR\icon\762x51mm_Bulk.paa";
-	};
-	class dzn_10Rnd_762x51_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = "7.62x51mm Ammunition (Tracers)";
-		descriptionShort = "Caliber: 7.62x51mm<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\762x51mm_Bulk_Tracer.paa";
-	};
-
-	//	5.45x39mm / Russian
-	class dzn_10Rnd_545x39_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "5.45x39mm Ammunition";
-		descriptionShort = "Caliber: 5.45x39mm<br />Rounds: 10";
-		mass = 3;
-		picture = "\dzn_MMR\icon\545x39mm_Bulk.paa";
-	};
-	class dzn_10Rnd_545x39_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = "5.45x39mm Ammunition (Tracers)";
-		descriptionShort = "Caliber: 5.45x39mm<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\545x39mm_Bulk_Tracer.paa";
-	};
-
-	//	7.62x39mm / Russian
-	class dzn_10Rnd_762x39_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "7.62x39mm Ammunition";
-		descriptionShort = "Caliber: 7.62x39mm<br />Rounds: 10";
-		mass = 4;
-		picture = "\dzn_MMR\icon\762x39mm_Bulk.paa";
-	};
-	class dzn_10Rnd_762x39_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = "7.62x39mm Ammunition (Tracers)";
-		descriptionShort = "Caliber: 7.62x39mm<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\762x39mm_Bulk_Tracer.paa";
-	};
-
-	//	7.62x54mmR / Russian
-	class dzn_10Rnd_762x54_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "7.62x54mmR Ammunition";
-		descriptionShort = "Caliber: 7.62x54mm R<br />Rounds: 10";
-		mass = 4.5;
-		picture = "\dzn_MMR\icon\762x54mm_Bulk.paa";
-	};
-	class dzn_10Rnd_762x54_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = "7.62x54mmR Ammunition (Tracers)";
-		descriptionShort = "Caliber: 7.62x54mm R<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\762x54mm_Bulk_Tracer.paa";
-	};
-
-
-	// 9x19mm Para
-	class dzn_10Rnd_9x19_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = "9x19mm Ammunition";
-		descriptionShort = "Caliber: 9x19mm<br />Rounds: 10";
-		mass = 2.5;
-		picture = "\dzn_MMR\icon\9x19mm_Bulk.paa";
-	};
-	class dzn_10Rnd_9x19_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = "9x19mm Ammunition (Tracers)";
-		descriptionShort = "Caliber: 9x19mm<br />Rounds: 10<br />Contains tracer rounds";
-		picture = "\dzn_MMR\icon\9x19mm_Bulk_Tracer.paa";
-	};
-
-	// .45ACP
-	class dzn_10Rnd_45ACP_Bulk: dzn_10Rnd_556x45_Bulk
-	{
-		displayName = ".45ACP Ammunition";
-		descriptionShort = "Caliber: .45 ACP<br />Rounds: 10";
-		mass = 2.5;
-		picture = "\dzn_MMR\icon\45ACP_Bulk.paa";
-	};
-	class dzn_10Rnd_45ACP_Bulk_Tracer: dzn_10Rnd_556x45_Bulk_Tracer
-	{
-		displayName = ".45ACP Ammunition (Tracers)";
-		descriptionShort = "Caliber: .45 ACP<br />Rounds: 10<br />Contains tracer rounds";
-		mass = 2.5;
-		picture = "\dzn_MMR\icon\45ACP_Bulk_Tracer.paa";
-	};
-};
-*/
 	
 /*
 	7.62x39	-	700
