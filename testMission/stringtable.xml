@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="dzn_MMR">
+	<Package name="dzn_MMR">
+ 		<Container name="Menus">
+			<!-- Settings labels -->
+			<Key ID="STR_MMR_Enabled">
+				<Original>Enabled</Original>
+				<Russian>Включить</Russian>
+			</Key>
+			<Key ID="STR_MMR_Enabled_desc">
+				<Original>Enable Multi-Magazine Repack</Original>
+				<Russian>Включить Multi-Magazine Repack</Russian>
+			</Key>
+			
+            <Key ID="STR_MMR_MMRC_Switch">
+				<Original>Open MMR Configurator</Original>
+				<Russian>Открыть конфигуратор MMR</Russian>
+			</Key>
+			<Key ID="STR_MMR_MMRC_Switch_desc">
+				<Original>Change checkbox state to Checked call MMRC interface in-game</Original>
+				<Russian>Выберите чекбокс чтобы открыть конфигуратор аддона в игре</Russian>
+			</Key>
+
+            <Key ID="STR_MMR_BulkSetting">
+				<Original>Bulk ammo classes</Original>
+				<Russian>Классы патронов россыпью</Russian>
+			</Key>
+			<Key ID="STR_MMR_BulkSetting_desc">
+				<Original>List of the magazine classes which will be used as "bulk ammunition" that can packed/unpacked to corresponding magazines</Original>
+				<Russian>Список классов магазинов, которые выступают в качестве "патронов россыпью" которые можно разряжать/заряжать в соответсвующие магазины</Russian>
+			</Key>
+
+            <Key ID="STR_MMR_MainMapSetting">
+				<Original>Magazines-to-Bulk ammo mapping</Original>
+				<Russian>Соотношение Магазинов-к-Патронам россыпью</Russian>
+			</Key>
+			<Key ID="STR_MMR_MainMapSetting_desc">
+				<Original>Array of mapping bulk ammo and magazine classes. Use MMR Configurator to update list via GUI</Original>
+				<Russian>Массив описывающий магазины и соответствующий им класс патронов россыпью. Используйте MMR Конфигуратор для настройки</Russian>
+			</Key>
+
+            <Key ID="STR_MMR_ExtraMapSettings">
+				<Original>Extra mapping</Original>
+				<Russian>Дополнительный маппинг</Russian>
+			</Key>
+			<Key ID="STR_MMR_ExtraMapSettings_desc">
+				<Original>Use for creating "Exchange To" options for specific magazines (e.g. PG-7 grenades from different mods). In format [@MagA1,@MagA2,@MagA3], [@MagB1,@MagB2,@MagB3]</Original>
+				<Russian>Используйте для создания опций "обмена" специфических магазинов (например, гранаты ПГ-7 из разных модов). В формате [@MagA1,@MagA2,@MagA3], [@MagB1,@MagB2,@MagB3]</Russian>
+			</Key>
+
+			<!-- In-game labels -->
+			<!-- Inventory dropdown -->
+			<Key ID="STR_MMR_Dropdown_Pack">
+				<Original>Pack</Original>
+				<Russian>Снарядить</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_Unpack">
+				<Original>Unpack</Original>
+				<Russian>Разрядить</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_PackTo">
+				<Original>Pack to ...</Original>
+				<Russian>Снарядить в</Russian>
+			</Key>
+			<Key ID="STR_MMR_Dropdown_ExchangeTo">
+				<Original>Exchange to</Original>
+				<Russian>Сменить на</Russian>
+			</Key>
+
+			<!-- Overlay general -->
+			<Key ID="STR_MMR_Overlay_CancelBtn">
+				<Original>CANCEL</Original> 
+				<Russian>ОТМЕНА</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_NotCompatibleLabel">
+				<Original>Not compatible</Original>
+				<Russian>Не совместим</Russian>
+			</Key>
+
+			<!-- Pack To Overlay -->
+			<Key ID="STR_MMR_Overlay_PackTo">
+				<Original>Pack to ...</Original> 
+				<Russian>Снарядить в ...</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_PackToLabel">
+				<Original>Pack to</Original> 
+				<Russian>Снарядить в</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_PackToBtn">
+				<Original>PACK TO</Original> 
+				<Russian>СНАРЯДИТЬ</Russian>
+			</Key>
+
+			<!-- Exchange To Overlay -->
+			<Key ID="STR_MMR_Overlay_ExchangeTo">
+				<Original>Exchange To ...</Original> 
+				<Russian>Сменить на ...</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_ExchangeToLabel">
+				<Original>Exchange to</Original> 
+				<Russian>Сменить на</Russian>
+			</Key>
+			<Key ID="STR_MMR_Overlay_ExchangeToBtn">
+				<Original>EXCHANGE TO</Original> 
+				<Russian>СМЕНИТЬ НА</Russian>
+			</Key>
+
+			<!-- Hints -->
+			<Key ID="STR_MMR_Hint_MagazineDropped">
+				<Original>%1 dropped</Original> 
+				<Russian>%1 сброшен</Russian>
+			</Key>
+			<Key ID="STR_MMR_Hint_MagazineToVehicle">
+				<Original>%1 dropped to vehicle</Original> 
+				<Russian>%1 сброшен в технику</Russian>
+			</Key>
+        </Container>
+	</Package>
+</Project>
